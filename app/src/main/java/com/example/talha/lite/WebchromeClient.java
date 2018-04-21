@@ -19,12 +19,17 @@ import java.io.ByteArrayOutputStream;
 
 public class WebchromeClient extends WebChromeClient {
     SeekBar sk;
-    Boolean flag;
+    Boolean flag=false;
     SharedPreferences preferences;
-    public WebchromeClient(SeekBar sk,Boolean flag,SharedPreferences preferences) {
-        this.flag=flag;
-        this.sk = sk;
-        this.preferences=preferences;
+    Bitmap map;
+    String url=null;
+
+    public WebchromeClient(SeekBar sk, SharedPreferences preferences,Boolean flag) {
+
+            this.sk = sk;
+            this.preferences = preferences;
+            this.flag=flag;
+
     }
 
     @Override
@@ -42,28 +47,34 @@ public class WebchromeClient extends WebChromeClient {
     @Override
     public void onReceivedIcon(WebView view, Bitmap icon) {
         super.onReceivedIcon(view, icon);
-        if(flag==true){
-            savebookmark(preferences,icon);
-            flag=false;
+        map = icon;
+        saveimage();
+        url=view.getUrl();
+        saveurl();
+    }
+    public void saveimage(){
+        SharedPreferences.Editor edit=preferences.edit();
+        String s=preferences.getString("bookmarkimage",null);
+        if(s!=null){
+            String toadd=s+",";
+            edit.putString("bookmarkimage",toadd+encodeTobase64(map)).apply();
         }else{
-
+            edit.putString("bookmarkimage",encodeTobase64(map)).apply();
         }
     }
-    public void savebookmark(SharedPreferences preferences,Bitmap icon){
-        SharedPreferences.Editor editor= preferences.edit();
-//        String s=preferences.getString("bookmarkimage",null);
-//        if(s!=null){
-//            s+=","+encodeTobase64(icon);
-//            editor.putString("bookmarkimage",s).apply();
-//
-//        }else{
-            editor.putString("bookmarkimage",encodeTobase64(icon)).apply();
-        Log.d("my","addid");
-//        }
-    }
-    public void deletebookmark(){
+    public void saveurl(){
+        SharedPreferences.Editor edit=preferences.edit();
+        String s=preferences.getString("imageurl",null);
+        if(s!=null){
+            String toadd=s+",";
+            edit.putString("imageurl",toadd+url).apply();
+        }else{
+            edit.putString("imageurl",url).apply();
+        }
 
     }
+
+
     public static String encodeTobase64(Bitmap image) {
         Bitmap immage = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

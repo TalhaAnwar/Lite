@@ -34,7 +34,7 @@ public class webActivity extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
         String url = null;
         if(bundle!=null){
-            url=bundle.getString("load");
+            url=bundle.getString("url");
         }
         sk= (SeekBar) findViewById(R.id.seekBar);
         go= (Button) findViewById(R.id.go);
@@ -46,7 +46,7 @@ public class webActivity extends AppCompatActivity {
         wb.getSettings().setJavaScriptEnabled(true);
         et= (EditText) findViewById(R.id.editText);
         cb= (CheckBox) findViewById(R.id.checkBox);
-        wb.setWebChromeClient(new WebchromeClient(sk,false,preferences));
+        wb.setWebChromeClient(new WebchromeClient(sk,preferences,false));
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
         wb.loadUrl("http://www.google.com.pk");
         if(url!=null){
@@ -55,6 +55,7 @@ public class webActivity extends AppCompatActivity {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 wb.loadUrl(et.getText().toString());
                 InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 key.hideSoftInputFromWindow(et.getWindowToken(), 0);
@@ -78,16 +79,6 @@ public class webActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 wb.reload();
-            }
-        });
-        cb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cb.isChecked()) {
-                    new WebchromeClient(sk,true,preferences);
-                }else{
-
-                }
             }
         });
     }

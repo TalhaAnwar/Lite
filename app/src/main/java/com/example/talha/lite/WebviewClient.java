@@ -31,11 +31,9 @@ public class WebviewClient extends WebViewClient {
         SharedPreferences.Editor editor = preferences.edit();
         String add = preferences.getString("history", null);
         if (add != null) {
-            editor.putString("history", url + "," + add);
-            editor.apply();
+            editor.putString("history", url + "," + add).apply();
         } else {
-            editor.putString("history", url);
-            editor.apply();
+            editor.putString("history", url).apply();
         }
     }
 }
