@@ -130,8 +130,8 @@ public class BookmarkActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         String s = preferences.getString("bookmarkimage", null);
         if (s != null) {
             s1 = s.split(",");
