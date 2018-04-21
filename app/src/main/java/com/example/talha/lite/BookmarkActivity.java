@@ -140,11 +140,9 @@ public class BookmarkActivity extends AppCompatActivity {
                 m[i] = decodeBase64(s1[i]);
             }
             gv.setAdapter(new Myadapter(this, m));
-
         }
         String urls = preferences.getString("imageurl", null);
         if (urls != null)
             url = urls.split(",");
-
     }
 }
