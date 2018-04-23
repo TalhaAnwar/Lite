@@ -20,7 +20,7 @@ import android.widget.SeekBar;
 
 public class webActivity extends AppCompatActivity {
     CheckBox cb;
-    Button go,back,forward,refresh;
+    Button go, back, forward, refresh;
     EditText et;
     WebView wb;
     SeekBar sk;
@@ -31,47 +31,70 @@ public class webActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Bundle bundle=getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
         String url = null;
-        if(bundle!=null){
-            url=bundle.getString("url");
+        if (bundle != null) {
+            url = bundle.getString("url");
         }
-        sk= (SeekBar) findViewById(R.id.seekBar);
-        go= (Button) findViewById(R.id.go);
-        back= (Button) findViewById(R.id.back);
-        forward= (Button) findViewById(R.id.forward);
-        refresh= (Button) findViewById(R.id.refresh);
-        wb= (WebView) findViewById(R.id.webview);
+        sk = (SeekBar) findViewById(R.id.seekBar);
+        go = (Button) findViewById(R.id.go);
+        back = (Button) findViewById(R.id.back);
+        forward = (Button) findViewById(R.id.forward);
+        refresh = (Button) findViewById(R.id.refresh);
+        wb = (WebView) findViewById(R.id.webview);
         wb.setWebViewClient(new WebviewClient(preferences));
         wb.getSettings().setJavaScriptEnabled(true);
-        et= (EditText) findViewById(R.id.editText);
-        cb= (CheckBox) findViewById(R.id.checkBox);
-        wb.setWebChromeClient(new WebchromeClient(sk,preferences,false));
+        et = (EditText) findViewById(R.id.editText);
+        cb = (CheckBox) findViewById(R.id.checkBox);
+        wb.setWebChromeClient(new WebchromeClient(sk, preferences, false,this));
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
         wb.loadUrl("http://www.google.com.pk");
-        if(url!=null){
+        et.setText("http://www.google.com.pk");
+        if (url != null) {
             wb.loadUrl(url);
+            et.setText(url);
         }
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url = et.getText().toString();
+                url.replaceAll(" ", "+");
+                if ((url.contains("http://") || url.contains("https://"))) {
+                    if ((url.contains("www."))) {
+                        wb.loadUrl(url);
+                        et.setText(url);
+                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    }
+                } else {
+                    if (url.contains("www.")) {
+                        wb.loadUrl(url);
+                        et.setText(url);
+                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    } else {
+                        url = "https://www.google.com.pk/search?q=" + url;
+                        wb.loadUrl(url);
+                        et.setText(url);
+                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    }
+                }
 
-                wb.loadUrl(et.getText().toString());
-                InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(wb.canGoBack())
-                wb.goBack();
+                if (wb.canGoBack())
+                    wb.goBack();
             }
         });
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(wb.canGoForward())
+                if (wb.canGoForward())
                     wb.goForward();
             }
         });
@@ -85,14 +108,14 @@ public class webActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.history){
-            startActivity(new Intent(this,HistoryActivity.class));
+        if (item.getItemId() == R.id.history) {
+            startActivity(new Intent(this, HistoryActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

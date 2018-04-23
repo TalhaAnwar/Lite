@@ -1,34 +1,37 @@
 package com.example.talha.lite;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.SeekBar;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * Created by Talha on 17/04/2018.
- */
-
 public class WebchromeClient extends WebChromeClient {
     SeekBar sk;
-    Boolean flag=false;
+    Boolean flag = false;
     SharedPreferences preferences;
     Bitmap map;
-    String url=null;
+    String url = null;
+    String title=null;
+    Context ctx;
 
-    public WebchromeClient(SeekBar sk, SharedPreferences preferences,Boolean flag) {
-
-            this.sk = sk;
-            this.preferences = preferences;
-            this.flag=flag;
+    public WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag,Context ctx) {
+        this.ctx=ctx;
+        this.sk = sk;
+        this.preferences = preferences;
+        this.flag = flag;
 
     }
 
@@ -48,32 +51,65 @@ public class WebchromeClient extends WebChromeClient {
     public void onReceivedIcon(WebView view, Bitmap icon) {
         super.onReceivedIcon(view, icon);
         map = icon;
-        saveimage();
-        url=view.getUrl();
-        saveurl();
+        url = view.getUrl();
+        savetitle();
+
     }
-    public void saveimage(){
-        SharedPreferences.Editor edit=preferences.edit();
-        String s=preferences.getString("bookmarkimage",null);
-        if(s!=null){
-            String toadd=s+",";
-            edit.putString("bookmarkimage",toadd+encodeTobase64(map)).apply();
-        }else{
-            edit.putString("bookmarkimage",encodeTobase64(map)).apply();
+
+    public void saveimage() {
+        SharedPreferences.Editor edit = preferences.edit();
+        String s = preferences.getString("bookmarkimage", null);
+        if (s != null) {
+            String toadd = s + ",";
+            edit.putString("bookmarkimage", toadd + encodeTobase64(map)).apply();
+        } else {
+            edit.putString("bookmarkimage", encodeTobase64(map)).apply();
         }
     }
-    public void saveurl(){
-        SharedPreferences.Editor edit=preferences.edit();
-        String s=preferences.getString("imageurl",null);
-        if(s!=null){
-            String toadd=s+",";
-            edit.putString("imageurl",toadd+url).apply();
-        }else{
-            edit.putString("imageurl",url).apply();
+
+    public void saveurl() {
+        SharedPreferences.Editor edit = preferences.edit();
+        String s = preferences.getString("imageurl", null);
+        if (s != null) {
+            String toadd = s + ",";
+            edit.putString("imageurl", toadd + url).apply();
+        } else {
+            edit.putString("imageurl", url).apply();
         }
 
     }
 
+    public void savetitle() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+        builder.setTitle("Enter Title");
+        final EditText input = new EditText(ctx);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                title = input.getText().toString();
+                SharedPreferences.Editor edit = preferences.edit();
+                String s = preferences.getString("title", null);
+                if (s != null) {
+                    String toadd = s + ",";
+                    edit.putString("title", toadd + title).apply();
+                } else {
+                    edit.putString("title", title).apply();
+                }
+                saveimage();
+                saveurl();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
 
     public static String encodeTobase64(Bitmap image) {
         Bitmap immage = image;

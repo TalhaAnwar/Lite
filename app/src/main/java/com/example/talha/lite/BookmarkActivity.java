@@ -25,8 +25,7 @@ public class BookmarkActivity extends AppCompatActivity {
     Button go1;
     EditText et1;
     GridView gv;
-    String url[];
-    String s1[];
+    String url[], s1[], title[];
     SharedPreferences preferences;
 
     @Override
@@ -40,17 +39,36 @@ public class BookmarkActivity extends AppCompatActivity {
         go1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", et1.getText().toString()));
+                if (et1.getText() != null) {
+                    String url = et1.getText().toString();
+                    url.replaceAll(" ", "+");
+                    if ((url.contains("http://") || url.contains("https://"))) {
+                        if ((url.contains("www."))) {
+                            startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
+                        }
+                    } else {
+                        if (url.contains("www.")) {
+                            startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
+                        } else {
+                            url = "https://www.google.com.pk/search?q=" + url;
+                            startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
+                        }
+                    }
+
+                }
+
             }
         });
         String s = preferences.getString("bookmarkimage", null);
-        if (s != null) {
-            s1= s.split(",");
+        String t = preferences.getString("title", null);
+        if (s != null && t!=null) {
+            s1 = s.split(",");
+            title = t.split(",");
             Bitmap m[] = new Bitmap[s1.length];
             for (int i = 0; i < s1.length; i++) {
                 m[i] = decodeBase64(s1[i]);
             }
-            gv.setAdapter(new Myadapter(this, m));
+            gv.setAdapter(new Myadapter(this, m, title));
 
         }
         String urls = preferences.getString("imageurl", null);
@@ -67,6 +85,7 @@ public class BookmarkActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 deletebookmark(position);
                 return false;
+
             }
         });
     }
@@ -74,42 +93,53 @@ public class BookmarkActivity extends AppCompatActivity {
     public void deletebookmark(int position) {
         String imgs = preferences.getString("bookmarkimage", null);
         String urls = preferences.getString("imageurl", null);
+        String titles = preferences.getString("title", null);
         s1 = new String[0];
         url = new String[0];
+        title = new String[0];
         if (imgs != null) {
             s1 = imgs.split(",");
         }
         if (urls != null) {
             url = urls.split(",");
         }
-        s1[position] = null;
-        url[position] = null;
-        imgs = null;
-        urls = null;
+        if (titles != null) {
+            title = titles.split(",");
+        }
+        s1[position] = "";
+        url[position] = "";
+        title[position] = "";
+        imgs = "";
+        urls = "";
+        titles = "";
         for (int i = 0; i < s1.length; i++) {
             if (s1[i] != null) {
-                imgs += s1[i]+"," ;
-                urls += url[i]+"," ;
+                imgs += s1[i] + ",";
+                urls += url[i] + ",";
+                titles += title[i] + ",";
             }
         }
         SharedPreferences.Editor edit = preferences.edit();
         edit.putString("bookmarkimage", imgs).apply();
         edit.putString("imageurl", urls).apply();
+        edit.putString("title", titles).apply();
         String s = preferences.getString("bookmarkimage", null);
+        String t = preferences.getString("title", null);
         if (s != null) {
-            s1= s.split(",");
+            s1 = s.split(",");
+            title = t.split(",");
             Bitmap m[] = new Bitmap[s1.length];
             for (int i = 0; i < s1.length; i++) {
                 m[i] = decodeBase64(s1[i]);
             }
-            gv.setAdapter(new Myadapter(this, m));
-
+            gv.setAdapter(new Myadapter(this, m, title));
         }
         urls = preferences.getString("imageurl", null);
         if (urls != null)
             url = urls.split(",");
 
     }
+
     public static Bitmap decodeBase64(String input) {
         byte[] decodedByte = Base64.decode(input, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
@@ -133,13 +163,15 @@ public class BookmarkActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         String s = preferences.getString("bookmarkimage", null);
+        String t = preferences.getString("title", null);
         if (s != null) {
             s1 = s.split(",");
+            title = t.split(",");
             Bitmap m[] = new Bitmap[s1.length];
             for (int i = 0; i < s1.length; i++) {
                 m[i] = decodeBase64(s1[i]);
             }
-            gv.setAdapter(new Myadapter(this, m));
+            gv.setAdapter(new Myadapter(this, m, title));
         }
         String urls = preferences.getString("imageurl", null);
         if (urls != null)
