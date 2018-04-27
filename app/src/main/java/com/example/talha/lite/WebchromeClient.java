@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -23,8 +20,8 @@ class WebchromeClient extends WebChromeClient {
     static private SharedPreferences preferences;
     static private Bitmap map;
     static private String url = null;
-    String title=null;
     static private Context ctx;
+    String title = null;
 
      WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag,Context ctx) {
         WebchromeClient.ctx =ctx;
@@ -34,6 +31,14 @@ class WebchromeClient extends WebChromeClient {
     }
     WebchromeClient(){
 
+    }
+
+    private static String encodeTobase64(Bitmap image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if (image != null)
+            image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     @Override
@@ -54,7 +59,6 @@ class WebchromeClient extends WebChromeClient {
         map = icon;
         url = view.getUrl();
         }
-
 
     private void saveimage() {
         SharedPreferences.Editor edit = preferences.edit();
@@ -79,7 +83,7 @@ class WebchromeClient extends WebChromeClient {
 
     }
 
-    private void savetitle() {
+    void savetitle() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
         builder.setTitle(R.string.enter_title);
         final EditText input = new EditText(ctx);
@@ -110,14 +114,6 @@ class WebchromeClient extends WebChromeClient {
         builder.show();
 
 
-    }
-
-    private static String encodeTobase64(Bitmap image) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        if(image !=null)
-        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
 }
