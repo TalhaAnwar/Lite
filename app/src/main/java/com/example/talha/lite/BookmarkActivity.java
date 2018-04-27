@@ -42,7 +42,7 @@ public class BookmarkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (et1.getText() != null) {
                     String url = et1.getText().toString();
-                    url.replaceAll(" ", "+");
+                    url=url.replaceAll(" ", "+");
                     if ((url.contains("http://") || url.contains("https://"))) {
                         if ((url.contains("www."))) {
                             startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
@@ -51,7 +51,7 @@ public class BookmarkActivity extends AppCompatActivity {
                         if (url.contains("www.")) {
                             startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
                         } else {
-                            url = "https://www.google.com.pk/search?q=" + url;
+                            url = getString(R.string.google_search) + url;
                             startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
                         }
                     }
@@ -163,11 +163,11 @@ public class BookmarkActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.sethome){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Enter Home page");
+            builder.setTitle(R.string.enter_home_url);
             final EditText input = new EditText(this);
             input.setInputType(InputType.TYPE_CLASS_TEXT);
             builder.setView(input);
-            builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String title = input.getText().toString();
@@ -175,7 +175,7 @@ public class BookmarkActivity extends AppCompatActivity {
                     edit.putString("home",title).apply();
                 }
             });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();

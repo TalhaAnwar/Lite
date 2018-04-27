@@ -11,7 +11,7 @@
         android:id="@+id/clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clear" />
+        android:text="@string/clear" />
 
     <ListView
         android:id="@+id/historylist"

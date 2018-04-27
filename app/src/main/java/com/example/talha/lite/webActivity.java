@@ -69,7 +69,7 @@ public class webActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String url = et.getText().toString();
-                url.replaceAll(" ", "+");
+                url=url.replaceAll(" ", "+");
                 if ((url.contains("http://") || url.contains("https://"))) {
                     if ((url.contains("www."))) {
                         wb.loadUrl(url);
@@ -84,7 +84,7 @@ public class webActivity extends AppCompatActivity {
                         InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         key.hideSoftInputFromWindow(et.getWindowToken(), 0);
                     } else {
-                        url = "https://www.google.com.pk/search?q=" + url;
+                        url = R.string.google_search + url;
                         wb.loadUrl(url);
                         et.setText(url);
                         InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -134,16 +134,16 @@ public class webActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.sethome){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Enter Home page");
+            builder.setTitle(R.string.enter_home_url);
             final EditText input = new EditText(this);
             input.setInputType(InputType.TYPE_CLASS_TEXT);
             builder.setView(input);
-            builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String title = input.getText().toString();
                     SharedPreferences.Editor edit=preferences.edit();
-                    edit.putString("home",title);
+                    edit.putString("home",title).apply();
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

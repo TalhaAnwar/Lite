@@ -18,21 +18,21 @@ import android.widget.SeekBar;
 
 import java.io.ByteArrayOutputStream;
 
-public class WebchromeClient extends WebChromeClient {
-    static SeekBar sk;
-    static SharedPreferences preferences;
-    static Bitmap map;
-    static String url = null;
+class WebchromeClient extends WebChromeClient {
+    static private SeekBar sk;
+    static private SharedPreferences preferences;
+    static private Bitmap map;
+    static private String url = null;
     String title=null;
-    static Context ctx;
+    static private Context ctx;
 
-    public WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag,Context ctx) {
-        this.ctx=ctx;
-        this.sk = sk;
-        this.preferences = preferences;
+     WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag,Context ctx) {
+        WebchromeClient.ctx =ctx;
+        WebchromeClient.sk = sk;
+        WebchromeClient.preferences = preferences;
 
     }
-    public WebchromeClient(){
+    WebchromeClient(){
 
     }
 
@@ -56,7 +56,7 @@ public class WebchromeClient extends WebChromeClient {
         }
 
 
-    public void saveimage() {
+    private void saveimage() {
         SharedPreferences.Editor edit = preferences.edit();
         String s = preferences.getString("bookmarkimage", null);
         if (s != null) {
@@ -67,7 +67,7 @@ public class WebchromeClient extends WebChromeClient {
         }
     }
 
-    public void saveurl() {
+    private void saveurl() {
         SharedPreferences.Editor edit = preferences.edit();
         String s = preferences.getString("imageurl", null);
         if (s != null) {
@@ -79,13 +79,13 @@ public class WebchromeClient extends WebChromeClient {
 
     }
 
-    public void savetitle() {
+    private void savetitle() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-        builder.setTitle("Enter Title");
+        builder.setTitle(R.string.enter_title);
         final EditText input = new EditText(ctx);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 title = input.getText().toString();
@@ -101,7 +101,7 @@ public class WebchromeClient extends WebChromeClient {
                 saveurl();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -112,14 +112,12 @@ public class WebchromeClient extends WebChromeClient {
 
     }
 
-    public static String encodeTobase64(Bitmap image) {
-        Bitmap immage = image;
+    private static String encodeTobase64(Bitmap image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        if(immage!=null)
-        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        if(image !=null)
+        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
+        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
 }

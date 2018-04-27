@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
             android:ems="10"
-            android:hint="Enter Url"
+            android:hint="@string/enter_url"
             android:inputType="textWebEditText" />
 
 
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
-            android:text="Go" />
+            android:text="@string/go" />
 
     </LinearLayout>
 
@@ -65,21 +65,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Back" />
+            android:text="@string/back" />
 
         <Button
             android:id="@+id/refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Refresh" />
+            android:text="@string/refresh" />
 
         <Button
             android:id="@+id/forward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Forward" />
+            android:text="@string/forward" />
     </LinearLayout>
 
 </LinearLayout>
