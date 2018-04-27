@@ -19,19 +19,20 @@ import android.widget.SeekBar;
 import java.io.ByteArrayOutputStream;
 
 public class WebchromeClient extends WebChromeClient {
-    SeekBar sk;
-    Boolean flag = false;
-    SharedPreferences preferences;
-    Bitmap map;
-    String url = null;
+    static SeekBar sk;
+    static SharedPreferences preferences;
+    static Bitmap map;
+    static String url = null;
     String title=null;
-    Context ctx;
+    static Context ctx;
 
     public WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag,Context ctx) {
         this.ctx=ctx;
         this.sk = sk;
         this.preferences = preferences;
-        this.flag = flag;
+
+    }
+    public WebchromeClient(){
 
     }
 
@@ -52,9 +53,8 @@ public class WebchromeClient extends WebChromeClient {
         super.onReceivedIcon(view, icon);
         map = icon;
         url = view.getUrl();
-        savetitle();
+        }
 
-    }
 
     public void saveimage() {
         SharedPreferences.Editor edit = preferences.edit();
@@ -109,11 +109,13 @@ public class WebchromeClient extends WebChromeClient {
         });
         builder.show();
 
+
     }
 
     public static String encodeTobase64(Bitmap image) {
         Bitmap immage = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if(immage!=null)
         immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);

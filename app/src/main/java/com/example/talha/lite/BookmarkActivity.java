@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -61,7 +62,7 @@ public class BookmarkActivity extends AppCompatActivity {
         });
         String s = preferences.getString("bookmarkimage", null);
         String t = preferences.getString("title", null);
-        if (s != null && t!=null) {
+        if (s != null && t != null) {
             s1 = s.split(",");
             title = t.split(",");
             Bitmap m[] = new Bitmap[s1.length];
@@ -77,7 +78,8 @@ public class BookmarkActivity extends AppCompatActivity {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url[position]));
+                if (url != null)
+                    startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url[position]));
             }
         });
         gv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -106,14 +108,14 @@ public class BookmarkActivity extends AppCompatActivity {
         if (titles != null) {
             title = titles.split(",");
         }
-        s1[position] = "";
-        url[position] = "";
-        title[position] = "";
+        s1[position] = null;
+        url[position] = null;
+        title[position] = null;
         imgs = "";
         urls = "";
         titles = "";
         for (int i = 0; i < s1.length; i++) {
-            if (s1[i] != null) {
+            if (s1[i] != null && url[i] != null && title[i] != null) {
                 imgs += s1[i] + ",";
                 urls += url[i] + ",";
                 titles += title[i] + ",";
@@ -125,7 +127,7 @@ public class BookmarkActivity extends AppCompatActivity {
         edit.putString("title", titles).apply();
         String s = preferences.getString("bookmarkimage", null);
         String t = preferences.getString("title", null);
-        if (s != null) {
+        if (s != null && s != "" && t != null && t != "") {
             s1 = s.split(",");
             title = t.split(",");
             Bitmap m[] = new Bitmap[s1.length];
@@ -156,6 +158,31 @@ public class BookmarkActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.history) {
             startActivity(new Intent(this, HistoryActivity.class));
         }
+        if(item.getItemId()==R.id.home){
+            startActivity(new Intent(this,webActivity.class));
+        }
+        if(item.getItemId()==R.id.sethome){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Enter Home page");
+            final EditText input = new EditText(this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+            builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String title = input.getText().toString();
+                    SharedPreferences.Editor edit=preferences.edit();
+                    edit.putString("home",title).apply();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -164,7 +191,7 @@ public class BookmarkActivity extends AppCompatActivity {
         super.onResume();
         String s = preferences.getString("bookmarkimage", null);
         String t = preferences.getString("title", null);
-        if (s != null) {
+        if (s != null && s != "" && t != null && t != "") {
             s1 = s.split(",");
             title = t.split(",");
             Bitmap m[] = new Bitmap[s1.length];
@@ -174,7 +201,7 @@ public class BookmarkActivity extends AppCompatActivity {
             gv.setAdapter(new Myadapter(this, m, title));
         }
         String urls = preferences.getString("imageurl", null);
-        if (urls != null)
+        if (urls != null && urls != "")
             url = urls.split(",");
     }
 }

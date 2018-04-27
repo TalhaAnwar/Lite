@@ -22,10 +22,7 @@
         </activity>
         <activity android:name=".webActivity" />
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".BookmarkActivity">
-
-
-        </activity>
+        <activity android:name=".BookmarkActivity"></activity>
     </application>
 
 </manifest>
