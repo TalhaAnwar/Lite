@@ -4,26 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.talha.lite.webActivity"
-    android:weightSum="100">
+    android:weightSum="100"
+    tools:context="com.example.talha.lite.webActivity">
 
 
     <LinearLayout
-        android:layout_weight="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="10"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <EditText
-
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
             android:ems="10"
             android:hint="@string/enter_url"
-            android:inputType="textWebEditText" />
+            android:inputType="textVisiblePassword"
+            android:maxLines="1" />
 
 
         <ImageView
@@ -55,9 +55,9 @@
         android:layout_weight="70" />
 
     <LinearLayout
-        android:layout_weight="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="10"
         android:orientation="horizontal">
 
         <Button

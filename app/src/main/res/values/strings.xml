@@ -15,4 +15,6 @@
     <string name="history">History</string>
     <string name="home">Home</string>
     <string name="set_home">Set Home</string>
+    <string name="delete_bookmark">Delete Bookmark ?</string>
+    <string name="delete">Delete</string>
 </resources>

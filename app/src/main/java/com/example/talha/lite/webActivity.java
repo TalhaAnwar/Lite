@@ -4,20 +4,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.DownloadListener;
 import android.webkit.WebIconDatabase;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -59,6 +57,7 @@ public class webActivity extends AppCompatActivity {
         wb.setWebChromeClient(new WebchromeClient(sk, preferences, false,this));
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
         String home=preferences.getString("home",null);
+        if (home != null)
         wb.loadUrl(home);
         et.setText(wb.getUrl());
         if (url != null) {
@@ -130,6 +129,7 @@ public class webActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.home){
             String url=preferences.getString("home",null);
+            if (url != null)
             wb.loadUrl(url);
         }
         if(item.getItemId()==R.id.sethome){
@@ -142,8 +142,22 @@ public class webActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String title = input.getText().toString();
-                    SharedPreferences.Editor edit=preferences.edit();
-                    edit.putString("home",title).apply();
+                    if ((title.contains("http://") || title.contains("https://"))) {
+                        if ((title.contains("www."))) {
+                            SharedPreferences.Editor edit = preferences.edit();
+                            edit.putString("home", title).apply();
+                        }
+                    } else {
+                        if (title.contains("www.")) {
+                            title = "https://" + title;
+                            SharedPreferences.Editor edit = preferences.edit();
+                            edit.putString("home", title).apply();
+                        } else {
+                            title = "https://www." + title;
+                            SharedPreferences.Editor edit = preferences.edit();
+                            edit.putString("home", title).apply();
+                        }
+                    }
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

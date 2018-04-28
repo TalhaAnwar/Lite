@@ -6,30 +6,31 @@
     android:orientation="vertical"
     tools:context="com.example.talha.lite.BookmarkActivity">
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:weightSum="1">
         <EditText
-            android:maxLines="1"
+            android:id="@+id/et1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.95"
-            android:id="@+id/et1"
-            android:hint="@string/enter_url"/>
+            android:hint="@string/enter_url"
+            android:inputType="textVisiblePassword"
+            android:maxLines="1" />
         <Button
+            android:id="@+id/go2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
-            android:id="@+id/go2"
             android:text="@string/go"/>
 
     </LinearLayout>
 
     <GridView
+        android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/gv"
-        android:numColumns="3" />
+        android:numColumns="auto_fit" />
 
 </LinearLayout>

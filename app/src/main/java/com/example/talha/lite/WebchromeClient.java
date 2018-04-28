@@ -23,14 +23,14 @@ class WebchromeClient extends WebChromeClient {
     static private Context ctx;
     String title = null;
 
-     WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag,Context ctx) {
-        WebchromeClient.ctx =ctx;
+    WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag, Context ctx) {
+        WebchromeClient.ctx = ctx;
         WebchromeClient.sk = sk;
         WebchromeClient.preferences = preferences;
 
     }
-    WebchromeClient(){
 
+    WebchromeClient() {
     }
 
     private static String encodeTobase64(Bitmap image) {
@@ -58,7 +58,7 @@ class WebchromeClient extends WebChromeClient {
         super.onReceivedIcon(view, icon);
         map = icon;
         url = view.getUrl();
-        }
+    }
 
     private void saveimage() {
         SharedPreferences.Editor edit = preferences.edit();
