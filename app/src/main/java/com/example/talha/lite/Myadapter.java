@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,15 +18,16 @@ import java.util.ArrayList;
  */
 
 public class Myadapter extends BaseAdapter {
-    LayoutInflater inflator;
-    Context ct;
-    ArrayList<adap> list = new ArrayList<adap>();
+    private LayoutInflater inflator;
+    private Context ct;
+    private ArrayList<adap> list = new ArrayList<adap>();
 
     public Myadapter(Context ctx, Bitmap[] map, String[] title) {
         ct = ctx;
-        for (int i = 0; i < title.length; i++) {
-            list.add(new adap(map[i], title[i]));
-        }
+        if (title != null)
+            for (int i = 0; i < title.length; i++) {
+                list.add(new adap(map[i], title[i]));
+            }
     }
 
     @Override
@@ -48,14 +48,18 @@ public class Myadapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        inflator = (LayoutInflater) ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflator.inflate(R.layout.myadapter, parent, false);
-        ImageView img = (ImageView) view.findViewById(R.id.imageView);
-        TextView t = (TextView) view.findViewById(R.id.textView);
+        if (convertView == null) {
+            inflator = (LayoutInflater) ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflator.inflate(R.layout.myadapter, parent, false);
+        }
+        ImageView img = (ImageView) convertView.findViewById(R.id.imageView);
+        TextView t = (TextView) convertView.findViewById(R.id.textView);
         adap row = list.get(position);
-        img.setImageBitmap(row.maps);
-        t.setText(row.title);
-        return view;
+        if (row.maps != null)
+            img.setImageBitmap(row.maps);
+        if (row.title != "")
+            t.setText(row.title);
+        return convertView;
     }
 
 }
