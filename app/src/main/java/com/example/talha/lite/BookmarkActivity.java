@@ -85,8 +85,10 @@ public class BookmarkActivity extends AppCompatActivity {
             for (int i = 0; i < s1.length; i++) {
                 m[i] = decodeBase64(s1[i]);
             }
-
-            gv.setAdapter(new Myadapter(this, m, title));
+            if (s1.length >= 1) {
+                gv.setAdapter(new Myadapter(this, m, title));
+            } else
+                gv.setAdapter(new Myadapter(this, null, null));
         }
 
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -160,8 +162,10 @@ public class BookmarkActivity extends AppCompatActivity {
             for (int i = 0; i < s1.length; i++) {
                 m[i] = decodeBase64(s1[i]);
             }
-
+            if (s1.length >= 1)
             gv.setAdapter(new Myadapter(this, m, title));
+            else
+                gv.setAdapter(new Myadapter(this, null, null));
         }
     }
 
@@ -240,8 +244,10 @@ public class BookmarkActivity extends AppCompatActivity {
             for (int i = 0; i < s1.length; i++) {
                 m[i] = decodeBase64(s1[i]);
             }
-
-            gv.setAdapter(new Myadapter(this, m, title));
+            if (s1.length >= 1)
+                gv.setAdapter(new Myadapter(this, m, title));
+            else
+                gv.setAdapter(new Myadapter(this, null, null));
         }
     }
 }
