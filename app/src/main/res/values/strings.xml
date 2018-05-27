@@ -17,4 +17,5 @@
     <string name="set_home">Set Home</string>
     <string name="delete_bookmark">Delete Bookmark ?</string>
     <string name="delete">Delete</string>
+    <string name="no_images">No Images</string>
 </resources>

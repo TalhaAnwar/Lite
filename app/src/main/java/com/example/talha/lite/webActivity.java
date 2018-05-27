@@ -47,6 +47,7 @@ public class webActivity extends AppCompatActivity {
         wb = (WebView) findViewById(R.id.webview);
         wb.setWebViewClient(new WebviewClient(preferences));
         wb.getSettings().setJavaScriptEnabled(true);
+        wb.getSettings().setBuiltInZoomControls(true);
         et = (EditText) findViewById(R.id.editText);
         cb = (ImageView) findViewById(R.id.checkBox);
         cb.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +116,9 @@ public class webActivity extends AppCompatActivity {
                 wb.reload();
             }
         });
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,16 +130,24 @@ public class webActivity extends AppCompatActivity {
         }
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.no_images) {
+            if (!item.isChecked()) {
+                item.setChecked(true);
+                wb.getSettings().setLoadsImagesAutomatically(false);
+            } else {
+                item.setChecked(false);
+                wb.getSettings().setLoadsImagesAutomatically(true);
+            }
+        }
         if (item.getItemId() == R.id.history) {
             startActivity(new Intent(this, HistoryActivity.class));
         }
-        if(item.getItemId()==R.id.home){
-            String url=preferences.getString("home",null);
+        if (item.getItemId() == R.id.home) {
+            String url = preferences.getString("home", null);
             if (url != null)
-            wb.loadUrl(url);
+                wb.loadUrl(url);
         }
         if(item.getItemId()==R.id.sethome){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

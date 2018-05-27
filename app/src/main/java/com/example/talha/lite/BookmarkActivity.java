@@ -36,7 +36,6 @@ public class BookmarkActivity extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +61,7 @@ public class BookmarkActivity extends AppCompatActivity {
                         }
                     } else {
                         if (url.contains("www.")) {
+                            url = "https://" + url;
                             startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
                         } else {
                             url = getString(R.string.google_search) + url;
@@ -184,6 +184,13 @@ public class BookmarkActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.no_images) {
+            if (!item.isChecked()) {
+                item.setChecked(true);
+            } else {
+                item.setChecked(false);
+            }
+        }
         if (item.getItemId() == R.id.history) {
             startActivity(new Intent(this, HistoryActivity.class));
         }

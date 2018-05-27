@@ -7,13 +7,19 @@
         android:icon="@mipmap/history"
         android:title="@string/history" />
     <item
+        android:id="@+id/sethome"
+        android:icon="@mipmap/home"
+        android:title="@string/set_home"></item>
+    <item
         android:id="@+id/home"
         android:icon="@mipmap/home"
-        android:title="@string/home"
+        android:title="home"
         app:showAsAction="always" />
     <item
-        android:id="@+id/sethome"
-        android:title="@string/set_home">
+        android:id="@+id/no_images"
+        android:actionViewClass="android.widget.CheckBox"
+        android:checkable="true"
+        android:title="@string/no_images"></item>
 
-    </item>
+
 </menu>
