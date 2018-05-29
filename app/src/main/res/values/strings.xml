@@ -18,4 +18,20 @@
     <string name="delete_bookmark">Delete Bookmark ?</string>
     <string name="delete">Delete</string>
     <string name="no_images">No Images</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="speed_dials">Speed dials</string>
+
+    <string name="google">https://www.google.com</string>
+    <string name="youtube">https://www.youtube.com</string>
+    <string name="facebook">https://www.facebook.com</string>
+    <string name="wikipedia">https://www.wikipedia.com</string>
+    <string name="amazon">https://www.amazon.com</string>
+    <string name="olx">https://www.olx.com</string>
+    <string name="yahoo">https://www.yahoo.com</string>
+    <string name="instragram">https://www.instagram.com</string>
+    <string name="dailymotion">https://www.dailymotion.com</string>
+    <string name="pinterest">https://www.pinterest.com</string>
+    <string name="twitter">https://www.twitter.com</string>
+
+
 </resources>

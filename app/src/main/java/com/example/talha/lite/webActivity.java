@@ -141,6 +141,9 @@ public class webActivity extends AppCompatActivity {
                 wb.getSettings().setLoadsImagesAutomatically(true);
             }
         }
+        if (item.getItemId() == R.id.bookmarks) {
+            startActivity(new Intent(this, Bookmarks.class));
+        }
         if (item.getItemId() == R.id.history) {
             startActivity(new Intent(this, HistoryActivity.class));
         }

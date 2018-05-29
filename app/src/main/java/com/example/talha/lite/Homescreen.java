@@ -1,6 +1,5 @@
 package com.example.talha.lite;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,14 +20,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
-public class BookmarkActivity extends AppCompatActivity {
+
+public class Homescreen extends AppCompatActivity {
     Button go1;
     EditText et1;
     GridView gv;
-    String url[], s1[], title[], s, t, urls;
-    Bitmap m[];
-    Context ctx = this;
-
+    int[] simgs = {R.mipmap.google, R.mipmap.youtube, R.mipmap.facebook,
+            R.mipmap.wikipediia, R.mipmap.amazon, R.mipmap.olx,
+            R.mipmap.yahoo, R.mipmap.instagram, R.mipmap.dailymotion,
+            R.mipmap.pinterest, R.mipmap.twitter};
+    int[] urls = {R.string.google, R.string.youtube, R.string.facebook, R.string.wikipedia,
+            R.string.amazon, R.string.olx, R.string.yahoo, R.string.instragram, R.string.dailymotion,
+            R.string.pinterest, R.string.twitter};
     SharedPreferences preferences;
 
     public static Bitmap decodeBase64(String input) {
@@ -39,7 +42,7 @@ public class BookmarkActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bookmark);
+        setContentView(R.layout.homescreen);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         go1 = (Button) findViewById(R.id.go2);
         et1 = (EditText) findViewById(R.id.et1);
@@ -49,6 +52,7 @@ public class BookmarkActivity extends AppCompatActivity {
             edit.putString("home", getString(R.string.google_search)).apply();
             edit.putBoolean("homekey", true).apply();
         }
+
         go1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,112 +77,25 @@ public class BookmarkActivity extends AppCompatActivity {
 
             }
         });
-
-        s = preferences.getString("bookmarkimage", null);
-        t = preferences.getString("title", null);
-        urls = preferences.getString("imageurl", null);
-        if (s != null && t != null && urls != null) {
-            s1 = s.split(",");
-            title = t.split(",");
-            url = urls.split(",");
-            m = new Bitmap[s1.length];
-            for (int i = 0; i < s1.length; i++) {
-                m[i] = decodeBase64(s1[i]);
-            }
-            if (s1.length >= 1) {
-                gv.setAdapter(new Myadapter(this, m, title));
-            } else
-                gv.setAdapter(new Myadapter(this, null, null));
-        }
-
+        gv.setAdapter(new Myadapter(this, simgs));
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (url[position] != "")
-                    startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url[position]));
+
+                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", getString(urls[position])));
             }
         });
-        gv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final int p = position;
-                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-                builder.setTitle(R.string.delete_bookmark);
-                builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deletebookmark(p);
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
-                return false;
-            }
-        });
+
     }
 
-    public void deletebookmark(int position) {
-        s = preferences.getString("bookmarkimage", null);
-        urls = preferences.getString("imageurl", null);
-        t = preferences.getString("title", null);
-        s1 = new String[0];
-        url = new String[0];
-        title = new String[0];
-        if (s != null && urls != null && t != null) {
-            s1 = s.split(",");
-            url = urls.split(",");
-            title = t.split(",");
-        }
-        s1[position] = null;
-        url[position] = null;
-        title[position] = null;
-        s = "";
-        urls = "";
-        t = "";
-        for (int i = 0; i < s1.length; i++) {
-            if (s1[i] != null && url[i] != null && title[i] != null) {
-                s += s1[i] + ",";
-                urls += url[i] + ",";
-                t += title[i] + ",";
-            }
-        }
-        SharedPreferences.Editor edit = preferences.edit();
-        edit.putString("bookmarkimage", s).apply();
-        edit.putString("imageurl", urls).apply();
-        edit.putString("title", t).apply();
-        s = preferences.getString("bookmarkimage", null);
-        t = preferences.getString("title", null);
-        urls = preferences.getString("imageurl", null);
-        if (s != null && t != null && urls != null) {
-            s1 = s.split(",");
-            title = t.split(",");
-            url = urls.split(",");
-            m = new Bitmap[s1.length];
-            for (int i = 0; i < s1.length; i++) {
-                m[i] = decodeBase64(s1[i]);
-            }
-            if (s1.length >= 1)
-            gv.setAdapter(new Myadapter(this, m, title));
-            else
-                gv.setAdapter(new Myadapter(this, null, null));
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-
         if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
-            //noinspection RestrictedApi
             m.setOptionalIconsVisible(true);
         }
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -190,6 +107,9 @@ public class BookmarkActivity extends AppCompatActivity {
             } else {
                 item.setChecked(false);
             }
+        }
+        if (item.getItemId() == R.id.bookmarks) {
+            startActivity(new Intent(this, Bookmarks.class));
         }
         if (item.getItemId() == R.id.history) {
             startActivity(new Intent(this, HistoryActivity.class));
@@ -235,26 +155,5 @@ public class BookmarkActivity extends AppCompatActivity {
             builder.show();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        s = preferences.getString("bookmarkimage", null);
-        t = preferences.getString("title", null);
-        urls = preferences.getString("imageurl", null);
-        if (s != null && t != null && urls != null) {
-            s1 = s.split(",");
-            title = t.split(",");
-            url = urls.split(",");
-            m = new Bitmap[s1.length];
-            for (int i = 0; i < s1.length; i++) {
-                m[i] = decodeBase64(s1[i]);
-            }
-            if (s1.length >= 1)
-                gv.setAdapter(new Myadapter(this, m, title));
-            else
-                gv.setAdapter(new Myadapter(this, null, null));
-        }
     }
 }
