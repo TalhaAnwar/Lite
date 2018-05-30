@@ -7,40 +7,48 @@
     android:weightSum="100"
     tools:context="com.example.talha.lite.webActivity">
 
-
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.9"
-            android:ems="10"
-            android:hint="@string/enter_url"
-            android:inputType="textVisiblePassword"
-            android:maxLines="1" />
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:ems="10"
+                android:hint="@string/enter_url"
+                android:inputType="textVisiblePassword"
+                android:maxLines="1" />
 
 
-        <ImageView
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:src="@mipmap/bookmark" />
+            <ImageView
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:src="@mipmap/bookmark" />
 
-        <Button
-            android:id="@+id/go"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:background="@mipmap/go_button" />
+            <Button
+                android:id="@+id/go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:background="@mipmap/go_button" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -72,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/refresh_button" />
+
         <Button
             android:id="@+id/forward"
             android:layout_width="wrap_content"

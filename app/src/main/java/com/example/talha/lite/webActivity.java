@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import android.widget.SeekBar;
 
 public class webActivity extends AppCompatActivity {
     ImageView cb;
+    Toolbar toolbar;
     Button go, back, forward, refresh;
     EditText et;
     WebView wb;
@@ -33,6 +35,8 @@ public class webActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Bundle bundle = getIntent().getExtras();
         String url = null;

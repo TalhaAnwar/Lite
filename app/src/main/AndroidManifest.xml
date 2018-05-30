@@ -20,9 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".webActivity" />
+        <activity
+            android:name=".webActivity"
+            android:theme="@style/mytheme" />
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".Homescreen" />
+        <activity
+            android:name=".Homescreen"
+            android:theme="@style/mytheme" />
         <activity android:name=".Bookmarks"></activity>
     </application>
 

@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Base64;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.widget.GridView;
 
 
 public class Homescreen extends AppCompatActivity {
+    Toolbar toolbar;
     Button go1;
     EditText et1;
     GridView gv;
@@ -43,6 +45,8 @@ public class Homescreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         go1 = (Button) findViewById(R.id.go2);
         et1 = (EditText) findViewById(R.id.et1);
