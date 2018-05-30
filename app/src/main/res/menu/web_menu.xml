@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/go2"
+        android:icon="@mipmap/go_button"
+        android:title="@string/go"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/checkBox"
+        android:icon="@mipmap/bookmark"
+        android:title="@string/add_bookmark" />
+
+    <item
+        android:id="@+id/history"
+        android:icon="@mipmap/history"
+        android:title="@string/history" />
+    <item
+        android:id="@+id/sethome"
+        android:icon="@mipmap/home"
+        android:title="@string/set_home"></item>
+    <item
+        android:id="@+id/home"
+        android:icon="@mipmap/home"
+        android:title="home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/bookmarks"
+        android:icon="@mipmap/bookmark"
+        android:title="@string/bookmarks" />
+    <item
+        android:id="@+id/no_images"
+        android:actionViewClass="android.widget.CheckBox"
+        android:checkable="true"
+        android:title="@string/no_images"></item>
+
+</menu>

@@ -19,13 +19,11 @@ import android.webkit.WebIconDatabase;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 
 public class webActivity extends AppCompatActivity {
-    ImageView cb;
     Toolbar toolbar;
-    Button go, back, forward, refresh;
+    Button back, forward, refresh;
     EditText et;
     WebView wb;
     SeekBar sk;
@@ -44,7 +42,6 @@ public class webActivity extends AppCompatActivity {
             url = bundle.getString("url");
         }
         sk = (SeekBar) findViewById(R.id.seekBar);
-        go = (Button) findViewById(R.id.go);
         back = (Button) findViewById(R.id.back);
         forward = (Button) findViewById(R.id.forward);
         refresh = (Button) findViewById(R.id.refresh);
@@ -53,53 +50,16 @@ public class webActivity extends AppCompatActivity {
         wb.getSettings().setJavaScriptEnabled(true);
         wb.getSettings().setBuiltInZoomControls(true);
         et = (EditText) findViewById(R.id.editText);
-        cb = (ImageView) findViewById(R.id.checkBox);
-        cb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new WebchromeClient().savetitle();
-            }
-        });
-        wb.setWebChromeClient(new WebchromeClient(sk, preferences, false,this));
+        wb.setWebChromeClient(new WebchromeClient(sk, preferences, false, this));
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
-        String home=preferences.getString("home",null);
+        String home = preferences.getString("home", null);
         if (home != null)
-        wb.loadUrl(home);
+            wb.loadUrl(home);
         et.setText(wb.getUrl());
         if (url != null) {
             wb.loadUrl(url);
             et.setText(url);
         }
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = et.getText().toString();
-                url=url.replaceAll(" ", "+");
-                if ((url.contains("http://") || url.contains("https://"))) {
-                    if ((url.contains("www."))) {
-                        wb.loadUrl(url);
-                        et.setText(url);
-                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    }
-                } else {
-                    if (url.contains("www.")) {
-                        wb.loadUrl(url);
-                        et.setText(url);
-                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    } else {
-                        url = R.string.google_search + url;
-                        wb.loadUrl(url);
-                        et.setText(url);
-                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    }
-                }
-
-
-            }
-        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +86,7 @@ public class webActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.web_menu, menu);
         if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             //noinspection RestrictedApi
@@ -134,8 +94,12 @@ public class webActivity extends AppCompatActivity {
         }
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.checkBox) {
+            new WebchromeClient().savetitle();
+        }
         if (item.getItemId() == R.id.no_images) {
             if (!item.isChecked()) {
                 item.setChecked(true);
@@ -144,6 +108,32 @@ public class webActivity extends AppCompatActivity {
                 item.setChecked(false);
                 wb.getSettings().setLoadsImagesAutomatically(true);
             }
+        }
+        if (item.getItemId() == R.id.go2) {
+            String url = et.getText().toString();
+            url = url.replaceAll(" ", "+");
+            if ((url.contains("http://") || url.contains("https://"))) {
+                if ((url.contains("www."))) {
+                    wb.loadUrl(url);
+                    et.setText(url);
+                    InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                }
+            } else {
+                if (url.contains("www.")) {
+                    wb.loadUrl(url);
+                    et.setText(url);
+                    InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                } else {
+                    url = R.string.google_search + url;
+                    wb.loadUrl(url);
+                    et.setText(url);
+                    InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                }
+            }
+
         }
         if (item.getItemId() == R.id.bookmarks) {
             startActivity(new Intent(this, Bookmarks.class));
@@ -156,7 +146,7 @@ public class webActivity extends AppCompatActivity {
             if (url != null)
                 wb.loadUrl(url);
         }
-        if(item.getItemId()==R.id.sethome){
+        if (item.getItemId() == R.id.sethome) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.enter_home_url);
             final EditText input = new EditText(this);

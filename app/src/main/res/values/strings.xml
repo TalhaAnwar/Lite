@@ -18,8 +18,9 @@
     <string name="delete_bookmark">Delete Bookmark ?</string>
     <string name="delete">Delete</string>
     <string name="no_images">No Images</string>
-    <string name="bookmarks">Bookmarks</string>
+    <string name="bookmarks">Show Bookmarks</string>
     <string name="speed_dials">Speed dials</string>
+
 
     <string name="google">https://www.google.com</string>
     <string name="youtube">https://www.youtube.com</string>
@@ -32,6 +33,7 @@
     <string name="dailymotion">https://www.dailymotion.com</string>
     <string name="pinterest">https://www.pinterest.com</string>
     <string name="twitter">https://www.twitter.com</string>
+    <string name="add_bookmark">Add to bookmark</string>
 
 
 </resources>

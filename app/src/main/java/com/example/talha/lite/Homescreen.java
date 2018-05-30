@@ -48,7 +48,6 @@ public class Homescreen extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        go1 = (Button) findViewById(R.id.go2);
         et1 = (EditText) findViewById(R.id.et1);
         gv = (GridView) findViewById(R.id.gv);
         if (!preferences.getBoolean("homekey", false)) {
@@ -56,31 +55,6 @@ public class Homescreen extends AppCompatActivity {
             edit.putString("home", getString(R.string.google_search)).apply();
             edit.putBoolean("homekey", true).apply();
         }
-
-        go1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (et1.getText().toString() != "") {
-                    String url = et1.getText().toString();
-                    url = url.replaceAll(" ", "+");
-                    if ((url.contains("http://") || url.contains("https://"))) {
-                        if ((url.contains("www."))) {
-                            startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
-                        }
-                    } else {
-                        if (url.contains("www.")) {
-                            url = "https://" + url;
-                            startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
-                        } else {
-                            url = getString(R.string.google_search) + url;
-                            startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
-                        }
-                    }
-
-                }
-
-            }
-        });
         gv.setAdapter(new Myadapter(this, simgs));
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,7 +69,7 @@ public class Homescreen extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.home_menu, menu);
         if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
@@ -121,6 +95,28 @@ public class Homescreen extends AppCompatActivity {
         if (item.getItemId() == R.id.home) {
             if (preferences.getString("home", null) != null)
                 startActivity(new Intent(this, webActivity.class));
+        }
+        if (item.getItemId() == R.id.go2) {
+            if (et1.getText().toString() != "") {
+                String url = et1.getText().toString();
+                url = url.replaceAll(" ", "+");
+                if ((url.contains("http://") || url.contains("https://"))) {
+                    if ((url.contains("www."))) {
+                        startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
+                    }
+                } else {
+                    if (url.contains("www.")) {
+                        url = "https://" + url;
+                        startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
+                    } else {
+                        url = getString(R.string.google_search) + url;
+                        startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
+                    }
+                }
+
+            }
+
+
         }
         if (item.getItemId() == R.id.sethome) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
