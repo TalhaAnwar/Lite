@@ -21,11 +21,7 @@
         android:id="@+id/sethome"
         android:icon="@mipmap/home"
         android:title="@string/set_home"></item>
-    <item
-        android:id="@+id/home"
-        android:icon="@mipmap/home"
-        android:title="home"
-        app:showAsAction="always" />
+
     <item
         android:id="@+id/bookmarks"
         android:icon="@mipmap/bookmark"

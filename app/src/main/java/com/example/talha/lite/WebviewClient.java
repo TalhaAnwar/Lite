@@ -15,7 +15,6 @@ public class WebviewClient extends WebViewClient {
         this.preferences = preferences;
     }
 
-    @SuppressWarnings("deprication")
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         return super.shouldOverrideUrlLoading(view, url);

@@ -23,7 +23,7 @@ import android.widget.SeekBar;
 
 public class webActivity extends AppCompatActivity {
     Toolbar toolbar;
-    Button back, forward, refresh;
+    Button back, forward, refresh, homebtn;
     EditText et;
     WebView wb;
     SeekBar sk;
@@ -42,6 +42,7 @@ public class webActivity extends AppCompatActivity {
             url = bundle.getString("url");
         }
         sk = (SeekBar) findViewById(R.id.seekBar);
+        homebtn = (Button) findViewById(R.id.home);
         back = (Button) findViewById(R.id.back);
         forward = (Button) findViewById(R.id.forward);
         refresh = (Button) findViewById(R.id.refresh);
@@ -60,6 +61,14 @@ public class webActivity extends AppCompatActivity {
             wb.loadUrl(url);
             et.setText(url);
         }
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = preferences.getString("home", null);
+                if (url != null)
+                    wb.loadUrl(url);
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +130,7 @@ public class webActivity extends AppCompatActivity {
                 }
             } else {
                 if (url.contains("www.")) {
+                    url = "https://" + url;
                     wb.loadUrl(url);
                     et.setText(url);
                     InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -140,11 +150,6 @@ public class webActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.history) {
             startActivity(new Intent(this, HistoryActivity.class));
-        }
-        if (item.getItemId() == R.id.home) {
-            String url = preferences.getString("home", null);
-            if (url != null)
-                wb.loadUrl(url);
         }
         if (item.getItemId() == R.id.sethome) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
