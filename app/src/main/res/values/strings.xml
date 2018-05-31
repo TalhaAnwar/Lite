@@ -7,7 +7,7 @@
     <string name="enter_title">Enter Title</string>
     <string name="enter_url">Enter Url</string>
     <string name="go">Go</string>
-    <string name="clear">Clear</string>
+    <string name="clear_history">Clear History</string>
     <string name="back">Back</string>
     <string name="refresh">Refresh</string>
     <string name="forward">Forward</string>
@@ -25,7 +25,7 @@
     <string name="google">https://www.google.com</string>
     <string name="youtube">https://www.youtube.com</string>
     <string name="facebook">https://www.facebook.com</string>
-    <string name="wikipedia">https://www.wikipedia.com</string>
+    <string name="wikipedia">https://www.wikipedia.org</string>
     <string name="amazon">https://www.amazon.com</string>
     <string name="olx">https://www.olx.com</string>
     <string name="yahoo">https://www.yahoo.com</string>
@@ -33,6 +33,8 @@
     <string name="dailymotion">https://www.dailymotion.com</string>
     <string name="pinterest">https://www.pinterest.com</string>
     <string name="twitter">https://www.twitter.com</string>
+    <string name="linkedin">https://www.linkedin.com</string>
+    <string name="urdupoint">https://www.urdupoint.com/</string>
     <string name="add_bookmark">Add to bookmark</string>
 
 

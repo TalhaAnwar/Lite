@@ -2,17 +2,17 @@ package com.example.talha.lite;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 public class HistoryActivity extends AppCompatActivity {
-    Button clear;
     ListView lv;
     SharedPreferences preferences;
 
@@ -21,24 +21,14 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        clear = (Button) findViewById(R.id.clear);
         lv = (ListView) findViewById(R.id.historylist);
         String s = preferences.getString("history", null);
         String[] s1 = new String[0];
-        ;
         if (s != null) {
             s1 = s.split(",");
-            lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, s1));
+            lv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, s1));
         }
         final String[] s2=s1;
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                preferences.edit().putString("history", null).apply();
-                finish();
-            }
-        });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -46,5 +36,27 @@ public class HistoryActivity extends AppCompatActivity {
                 startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("load",s2[position]));
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.history_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.delete) {
+            preferences.edit().putString("history", null).apply();
+            String s = preferences.getString("history", null);
+            String[] s1 = new String[0];
+            if (s != null) {
+                s1 = s.split(",");
+                lv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, s1));
+            } else {
+                lv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, s1));
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

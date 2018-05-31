@@ -41,35 +41,36 @@
 
         <Button
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/bottombar_icon_size_width"
+            android:layout_height="@dimen/bottombar_icon_size_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:background="@mipmap/back_button"
-            android:gravity="bottom" />
+            android:background="@mipmap/back_button" />
 
         <Button
             android:id="@+id/refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/bottombar_icon_size_width"
+            android:layout_height="@dimen/bottombar_icon_size_height"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/forward"
-
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/home"
             android:background="@mipmap/refresh_button" />
 
         <Button
             android:id="@+id/home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/bottombar_icon_size_width"
+            android:layout_height="@dimen/bottombar_icon_size_height"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/back"
-            android:background="@mipmap/home" />
+            android:layout_centerInParent="true"
+            android:background="@mipmap/home"
+
+            />
 
 
         <Button
             android:id="@+id/forward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/bottombar_icon_size_width"
+            android:layout_height="@dimen/bottombar_icon_size_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:background="@mipmap/forward_button" />

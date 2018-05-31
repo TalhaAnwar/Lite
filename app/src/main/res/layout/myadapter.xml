@@ -10,6 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="@android:dimen/notification_large_icon_width"
         android:layout_height="@android:dimen/notification_large_icon_height"
+        android:layout_gravity="center"
         android:layout_margin="10dp"
         android:stretchMode="columnWidth"
         app:srcCompat="@mipmap/default_web" />

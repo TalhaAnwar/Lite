@@ -30,10 +30,10 @@ public class Homescreen extends AppCompatActivity {
     int[] simgs = {R.mipmap.google, R.mipmap.youtube, R.mipmap.facebook,
             R.mipmap.wikipediia, R.mipmap.amazon, R.mipmap.olx,
             R.mipmap.yahoo, R.mipmap.instagram, R.mipmap.dailymotion,
-            R.mipmap.pinterest, R.mipmap.twitter};
+            R.mipmap.pinterest, R.mipmap.twitter, R.mipmap.linkedin, R.mipmap.urdupoint};
     int[] urls = {R.string.google, R.string.youtube, R.string.facebook, R.string.wikipedia,
             R.string.amazon, R.string.olx, R.string.yahoo, R.string.instragram, R.string.dailymotion,
-            R.string.pinterest, R.string.twitter};
+            R.string.pinterest, R.string.twitter, R.string.linkedin, R.string.urdupoint};
     SharedPreferences preferences;
 
     public static Bitmap decodeBase64(String input) {
@@ -97,8 +97,8 @@ public class Homescreen extends AppCompatActivity {
                 startActivity(new Intent(this, webActivity.class));
         }
         if (item.getItemId() == R.id.go2) {
-            if (et1.getText().toString() != "") {
-                String url = et1.getText().toString();
+            String url = et1.getText().toString();
+            if (url != null && url.matches("")) {
                 url = url.replaceAll(" ", "+");
                 if ((url.contains("http://") || url.contains("https://"))) {
                     if ((url.contains("www."))) {
@@ -115,8 +115,6 @@ public class Homescreen extends AppCompatActivity {
                 }
 
             }
-
-
         }
         if (item.getItemId() == R.id.sethome) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

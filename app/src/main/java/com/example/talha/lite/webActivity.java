@@ -67,6 +67,7 @@ public class webActivity extends AppCompatActivity {
                 String url = preferences.getString("home", null);
                 if (url != null)
                     wb.loadUrl(url);
+                et.setText(wb.getUrl());
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -119,29 +120,33 @@ public class webActivity extends AppCompatActivity {
             }
         }
         if (item.getItemId() == R.id.go2) {
-            String url = et.getText().toString();
-            url = url.replaceAll(" ", "+");
-            if ((url.contains("http://") || url.contains("https://"))) {
-                if ((url.contains("www."))) {
-                    wb.loadUrl(url);
-                    et.setText(url);
-                    InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    key.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                }
-            } else {
-                if (url.contains("www.")) {
-                    url = "https://" + url;
-                    wb.loadUrl(url);
-                    et.setText(url);
-                    InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+            if (et.getText().toString() != "") {
+                String url = et.getText().toString();
+                url = url.replaceAll(" ", "+");
+                if ((url.contains("http://") || url.contains("https://"))) {
+                    if ((url.contains("www."))) {
+                        wb.loadUrl(url);
+                        et.setText(url);
+                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    }
                 } else {
-                    url = R.string.google_search + url;
-                    wb.loadUrl(url);
-                    et.setText(url);
-                    InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    if (url.contains("www.")) {
+                        url = "https://" + url;
+                        wb.loadUrl(url);
+                        et.setText(url);
+                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    } else {
+                        url = R.string.google_search + url;
+                        wb.loadUrl(url);
+                        et.setText(url);
+                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    }
                 }
+
+
             }
 
         }
