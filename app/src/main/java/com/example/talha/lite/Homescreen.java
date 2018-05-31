@@ -98,7 +98,7 @@ public class Homescreen extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.go2) {
             String url = et1.getText().toString();
-            if (url != null && url.matches("")) {
+            if (!et1.getText().toString().isEmpty()) {
                 url = url.replaceAll(" ", "+");
                 if ((url.contains("http://") || url.contains("https://"))) {
                     if ((url.contains("www."))) {
