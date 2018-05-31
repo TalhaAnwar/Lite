@@ -122,7 +122,6 @@ public class webActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.go2) {
             if (!et.getText().toString().isEmpty()) {
                 String url = et.getText().toString();
-                url = url.replaceAll(" ", "+");
                 if ((url.contains("http://") || url.contains("https://"))) {
                     if ((url.contains("www."))) {
                         wb.loadUrl(url);
