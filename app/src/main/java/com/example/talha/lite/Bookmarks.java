@@ -28,24 +28,6 @@ public class Bookmarks extends AppCompatActivity {
         setContentView(R.layout.activity_bookmarks);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         lv = (ListView) findViewById(R.id.lv);
-        s = preferences.getString("bookmarkimage", null);
-        t = preferences.getString("title", null);
-        urls = preferences.getString("imageurl", null);
-        if (s != null && t != null && urls != null) {
-            s1 = s.split(",");
-            title = t.split(",");
-            url = urls.split(",");
-            m = new Bitmap[s1.length];
-            for (int i = 0; i < s1.length; i++) {
-                m[i] = decodeBase64(s1[i]);
-            }
-            if (s1.length >= 1) {
-                lv.setAdapter(new Bookmarksadapter(this, m, title));
-            } else
-                lv.setAdapter(new Bookmarksadapter(this, null, null));
-        }
-
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,7 +66,7 @@ public class Bookmarks extends AppCompatActivity {
         s1 = new String[0];
         url = new String[0];
         title = new String[0];
-        if (s != null && urls != null && t != null) {
+        if (s != null && urls != null && t != null && !s.isEmpty()) {
             s1 = s.split(",");
             url = urls.split(",");
             title = t.split(",");
@@ -106,22 +88,7 @@ public class Bookmarks extends AppCompatActivity {
         edit.putString("bookmarkimage", s).apply();
         edit.putString("imageurl", urls).apply();
         edit.putString("title", t).apply();
-        s = preferences.getString("bookmarkimage", null);
-        t = preferences.getString("title", null);
-        urls = preferences.getString("imageurl", null);
-        if (s != null && t != null && urls != null) {
-            s1 = s.split(",");
-            title = t.split(",");
-            url = urls.split(",");
-            m = new Bitmap[s1.length];
-            for (int i = 0; i < s1.length; i++) {
-                m[i] = decodeBase64(s1[i]);
-            }
-            if (s1.length >= 1)
-                lv.setAdapter(new Bookmarksadapter(this, m, title));
-            else
-                lv.setAdapter(new Bookmarksadapter(this, null, null));
-        }
+        onResume();
     }
 
     @Override
@@ -130,7 +97,7 @@ public class Bookmarks extends AppCompatActivity {
         s = preferences.getString("bookmarkimage", null);
         t = preferences.getString("title", null);
         urls = preferences.getString("imageurl", null);
-        if (s != null && t != null && urls != null) {
+        if (s != null && t != null && urls != null && !s.isEmpty()) {
             s1 = s.split(",");
             title = t.split(",");
             url = urls.split(",");
