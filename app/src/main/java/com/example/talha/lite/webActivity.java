@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebIconDatabase;
@@ -28,6 +29,8 @@ public class webActivity extends AppCompatActivity {
     WebView wb;
     SeekBar sk;
     SharedPreferences preferences;
+    SharedPreferences.Editor edit;
+    Boolean b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class webActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        edit = preferences.edit();
         Bundle bundle = getIntent().getExtras();
         String url = null;
         if (bundle != null) {
@@ -54,6 +58,10 @@ public class webActivity extends AppCompatActivity {
         wb.setWebChromeClient(new WebchromeClient(sk, preferences, false, this));
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
         String home = preferences.getString("home", null);
+        b = preferences.getBoolean("noimages_status", false);
+        if (b) {
+            wb.getSettings().setLoadsImagesAutomatically(false);
+        }
         if (home != null)
             wb.loadUrl(home);
         et.setText(wb.getUrl());
@@ -61,6 +69,12 @@ public class webActivity extends AppCompatActivity {
             wb.loadUrl(url);
             et.setText(url);
         }
+        sk.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +111,14 @@ public class webActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.web_menu, menu);
+        b = preferences.getBoolean("incognito_status", false);
+        if (b) {
+            menu.findItem(R.id.privatebrowsing).setChecked(true);
+        }
+        b = preferences.getBoolean("noimages_status", false);
+        if (b) {
+            menu.findItem(R.id.no_images).setChecked(true);
+        }
         if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             //noinspection RestrictedApi
@@ -110,13 +132,24 @@ public class webActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.checkBox) {
             new WebchromeClient().savetitle();
         }
+        if (item.getItemId() == R.id.privatebrowsing) {
+            if (item.isChecked()) {
+                item.setChecked(true);
+                edit.putBoolean("incognito_status", true).apply();
+            } else {
+                item.setChecked(false);
+                edit.putBoolean("incognito_status", false).apply();
+            }
+        }
         if (item.getItemId() == R.id.no_images) {
             if (!item.isChecked()) {
                 item.setChecked(true);
                 wb.getSettings().setLoadsImagesAutomatically(false);
+                edit.putBoolean("noimages_status", true).apply();
             } else {
                 item.setChecked(false);
                 wb.getSettings().setLoadsImagesAutomatically(true);
+                edit.putBoolean("noimages_status", false).apply();
             }
         }
         if (item.getItemId() == R.id.go2) {

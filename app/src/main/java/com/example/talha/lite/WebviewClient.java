@@ -23,12 +23,16 @@ public class WebviewClient extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-        SharedPreferences.Editor editor = preferences.edit();
-        String add = preferences.getString("history", "");
-        if (add != "") {
-            editor.putString("history", url + "," + add).apply();
-        } else {
-            editor.putString("history", url).apply();
+        Boolean b = preferences.getBoolean("incognito_status", false);
+        if (!b) {
+            SharedPreferences.Editor editor = preferences.edit();
+            String add = preferences.getString("history", "");
+            if (add != "") {
+                editor.putString("history", url + "," + add).apply();
+            } else {
+                editor.putString("history", url).apply();
+            }
         }
+
     }
 }

@@ -36,6 +36,7 @@
     <string name="linkedin">https://www.linkedin.com</string>
     <string name="urdupoint">https://www.urdupoint.com/</string>
     <string name="add_bookmark">Add to bookmark</string>
+    <string name="private_browse">Private Browsing</string>
 
 
 </resources>

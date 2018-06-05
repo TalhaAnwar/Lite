@@ -35,6 +35,7 @@ public class Homescreen extends AppCompatActivity {
             R.string.amazon, R.string.olx, R.string.yahoo, R.string.instragram, R.string.dailymotion,
             R.string.pinterest, R.string.twitter, R.string.linkedin, R.string.urdupoint};
     SharedPreferences preferences;
+    SharedPreferences.Editor edit;
 
     public static Bitmap decodeBase64(String input) {
         byte[] decodedByte = Base64.decode(input, 0);
@@ -48,12 +49,16 @@ public class Homescreen extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        edit = preferences.edit();
         et1 = (EditText) findViewById(R.id.et1);
         gv = (GridView) findViewById(R.id.gv);
         if (!preferences.getBoolean("homekey", false)) {
-            SharedPreferences.Editor edit = preferences.edit();
+
             edit.putString("home", getString(R.string.google_search)).apply();
+            edit.putBoolean("incognito_status", false).apply();
+            edit.putBoolean("noimages_status", false).apply();
             edit.putBoolean("homekey", true).apply();
+
         }
         gv.setAdapter(new Myadapter(this, simgs));
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +75,14 @@ public class Homescreen extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_menu, menu);
+        Boolean b = preferences.getBoolean("incognito_status", false);
+        if (b) {
+            menu.findItem(R.id.privatebrowsing).setChecked(true);
+        }
+        b = preferences.getBoolean("noimages_status", false);
+        if (b) {
+            menu.findItem(R.id.no_images).setChecked(true);
+        }
         if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
@@ -79,11 +92,22 @@ public class Homescreen extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.privatebrowsing) {
+            if (!item.isChecked()) {
+                item.setChecked(true);
+                edit.putBoolean("incognito_status", true).apply();
+            } else {
+                item.setChecked(false);
+                edit.putBoolean("incognito_status", false).apply();
+            }
+        }
         if (item.getItemId() == R.id.no_images) {
             if (!item.isChecked()) {
                 item.setChecked(true);
+                edit.putBoolean("noimages_status", true).apply();
             } else {
                 item.setChecked(false);
+                edit.putBoolean("noimages_status", false).apply();
             }
         }
         if (item.getItemId() == R.id.bookmarks) {
