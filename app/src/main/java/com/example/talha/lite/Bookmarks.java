@@ -113,10 +113,11 @@ public class Bookmarks extends AppCompatActivity {
             for (int i = 0; i < s1.length; i++) {
                 m[i] = decodeBase64(s1[i]);
             }
-            if (s1.length >= 1)
-                lv.setAdapter(new Bookmarksadapter(this, m, title));
-            else
-                lv.setAdapter(new Bookmarksadapter(this, null, null));
+            lv.setAdapter(new Bookmarksadapter(this, m, title));
+
+
+        } else {
+            lv.setAdapter(new Bookmarksadapter(this, null, null));
         }
     }
 }
