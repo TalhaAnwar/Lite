@@ -12,7 +12,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
@@ -70,7 +69,7 @@ class WebchromeClient extends WebChromeClient {
         } else {
             edit.putString("bookmarkimage", encodeTobase64(map)).apply();
         }
-        Toast.makeText(ctx, "picsaved", Toast.LENGTH_SHORT).show();
+
         return true;
     }
 
@@ -83,8 +82,7 @@ class WebchromeClient extends WebChromeClient {
         } else {
             edit.putString("imageurl", url).apply();
         }
-        Toast.makeText(ctx, "urlsaved", Toast.LENGTH_SHORT).show();
-        saveimage();
+
         return true;
 
     }
@@ -108,7 +106,7 @@ class WebchromeClient extends WebChromeClient {
                     edit.putString("title", title).apply();
                 }
                 saveurl();
-                Toast.makeText(ctx, "titlesaved", Toast.LENGTH_SHORT).show();
+
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

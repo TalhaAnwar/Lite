@@ -37,5 +37,4 @@
         android:checkable="true"
         android:title="@string/private_browse" />
 
-
 </menu>
