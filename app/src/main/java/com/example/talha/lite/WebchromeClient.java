@@ -106,7 +106,7 @@ class WebchromeClient extends WebChromeClient {
                     edit.putString("title", title).apply();
                 }
                 saveurl();
-
+                saveimage();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

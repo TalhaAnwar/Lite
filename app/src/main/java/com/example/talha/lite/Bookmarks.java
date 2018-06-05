@@ -66,7 +66,7 @@ public class Bookmarks extends AppCompatActivity {
         s1 = new String[0];
         url = new String[0];
         title = new String[0];
-        if (s != null && urls != null && t != null && !s.isEmpty()) {
+        if (s != null) {
             s1 = s.split(",");
             url = urls.split(",");
             title = t.split(",");
@@ -78,16 +78,24 @@ public class Bookmarks extends AppCompatActivity {
         urls = "";
         t = "";
         for (int i = 0; i < s1.length; i++) {
-            if (s1[i] != null && url[i] != null && title[i] != null) {
+            if (s1[i] != null) {
                 s += s1[i] + ",";
                 urls += url[i] + ",";
                 t += title[i] + ",";
             }
         }
         SharedPreferences.Editor edit = preferences.edit();
-        edit.putString("bookmarkimage", s).apply();
-        edit.putString("imageurl", urls).apply();
-        edit.putString("title", t).apply();
+        if (s != "") {
+            edit.putString("bookmarkimage", s).apply();
+            edit.putString("imageurl", urls).apply();
+            edit.putString("title", t).apply();
+
+        } else {
+            edit.putString("bookmarkimage", null).apply();
+            edit.putString("imageurl", null).apply();
+            edit.putString("title", null).apply();
+
+        }
         onResume();
     }
 
@@ -97,7 +105,7 @@ public class Bookmarks extends AppCompatActivity {
         s = preferences.getString("bookmarkimage", null);
         t = preferences.getString("title", null);
         urls = preferences.getString("imageurl", null);
-        if (s != null && t != null && urls != null && !s.isEmpty()) {
+        if (s != null && urls != null && t != null) {
             s1 = s.split(",");
             title = t.split(",");
             url = urls.split(",");

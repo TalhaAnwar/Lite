@@ -24,10 +24,12 @@ public class Bookmarksadapter extends BaseAdapter {
 
     public Bookmarksadapter(Context ctx, Bitmap[] map, String[] title) {
         ct = ctx;
-        if (title != null)
+        if (title != null) {
             for (int i = 0; i < title.length; i++) {
                 list.add(new adapt(map[i], title[i]));
             }
+        }
+
     }
 
     @Override
