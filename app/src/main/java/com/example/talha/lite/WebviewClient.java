@@ -15,7 +15,6 @@ public class WebviewClient extends WebViewClient {
     private SharedPreferences preferences;
     private EditText et;
 
-
     public WebviewClient(SharedPreferences preferences, EditText editText) {
         this.preferences = preferences;
         et = editText;

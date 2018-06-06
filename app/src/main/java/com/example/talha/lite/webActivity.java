@@ -30,7 +30,7 @@ import android.webkit.WebIconDatabase;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import static com.example.talha.lite.Homescreen.validatehome;
@@ -41,7 +41,7 @@ public class webActivity extends AppCompatActivity {
     Button back, forward, refresh, homebtn;
     EditText et;
     WebView wb;
-    SeekBar sk;
+    ProgressBar sk;
     SharedPreferences preferences;
     SharedPreferences.Editor edit;
     Boolean b;
@@ -59,7 +59,7 @@ public class webActivity extends AppCompatActivity {
         if (bundle != null) {
             url = bundle.getString("url");
         }
-        sk = (SeekBar) findViewById(R.id.seekBar);
+        sk = (ProgressBar) findViewById(R.id.seekBar);
         homebtn = (Button) findViewById(R.id.home);
         back = (Button) findViewById(R.id.back);
         forward = (Button) findViewById(R.id.forward);

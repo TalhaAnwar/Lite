@@ -11,12 +11,12 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
-import android.widget.SeekBar;
+import android.widget.ProgressBar;
 
 import java.io.ByteArrayOutputStream;
 
 class WebchromeClient extends WebChromeClient {
-    static private SeekBar sk;
+    static private ProgressBar sk;
     static private SharedPreferences preferences;
     static private Bitmap map;
     static private String url = null;
@@ -24,7 +24,7 @@ class WebchromeClient extends WebChromeClient {
     static private String title = null;
 
 
-    WebchromeClient(SeekBar sk, SharedPreferences preferences, Context ctx) {
+    WebchromeClient(ProgressBar sk, SharedPreferences preferences, Context ctx) {
         WebchromeClient.ctx = ctx;
         WebchromeClient.sk = sk;
         WebchromeClient.preferences = preferences;
