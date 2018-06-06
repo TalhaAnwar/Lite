@@ -69,6 +69,13 @@ public class webActivity extends AppCompatActivity {
             wb.loadUrl(url);
             et.setText(url);
         }
+        et.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                et.setSelection(0, et.length());
+                return true;
+            }
+        });
         sk.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

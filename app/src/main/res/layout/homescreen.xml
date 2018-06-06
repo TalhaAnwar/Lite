@@ -15,6 +15,7 @@
             android:id="@+id/et1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:hint="@string/enter_url"
             android:inputType="text"
             android:maxLines="1" />
@@ -37,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/text"
-        android:numColumns="3"
+        android:numColumns="4"
         android:stretchMode="columnWidth" />
 
 </RelativeLayout>

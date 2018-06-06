@@ -17,14 +17,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
 
 public class Homescreen extends AppCompatActivity {
     Toolbar toolbar;
-    Button go1;
     EditText et1;
     GridView gv;
     int[] simgs = {R.mipmap.google, R.mipmap.youtube, R.mipmap.facebook,
@@ -66,6 +64,13 @@ public class Homescreen extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", getString(urls[position])));
+            }
+        });
+        et1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                et1.setSelection(0, et1.length());
+                return true;
             }
         });
 
