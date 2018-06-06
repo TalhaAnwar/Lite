@@ -38,7 +38,6 @@ public class Homescreen extends AppCompatActivity {
             R.string.pinterest, R.string.twitter, R.string.linkedin, R.string.urdupoint};
     SharedPreferences preferences;
     SharedPreferences.Editor edit;
-
     public static Bitmap decodeBase64(String input) {
         byte[] decodedByte = Base64.decode(input, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
@@ -62,6 +61,7 @@ public class Homescreen extends AppCompatActivity {
     }
 
     public static String validateurl(String url) {
+        url = url.replaceAll(" ", "+");
         if ((url.contains("http://") || url.contains("https://"))) {
             if ((url.contains("www."))) {
                 return url;
@@ -71,7 +71,7 @@ public class Homescreen extends AppCompatActivity {
                 url = "https://" + url;
                 return url;
             } else {
-                url = R.string.google_search + url;
+                url = "https://www.google.com.pk/search?q=" + url;
                 return url;
             }
         }
@@ -167,8 +167,7 @@ public class Homescreen extends AppCompatActivity {
             String url = et1.getText().toString();
             if (!et1.getText().toString().isEmpty()) {
                 url = validateurl(url);
-                url = url.replaceAll(" ", "+");
-                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", validateurl(url)));
+                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
             }
         }
         if (item.getItemId() == R.id.sethome) {
