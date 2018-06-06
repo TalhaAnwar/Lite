@@ -65,9 +65,9 @@ public class webActivity extends AppCompatActivity {
         forward = (Button) findViewById(R.id.forward);
         refresh = (Button) findViewById(R.id.refresh);
         wb = (WebView) findViewById(R.id.webview);
-        wb.setWebViewClient(new WebviewClient(preferences));
-        wb.getSettings().setJavaScriptEnabled(true);
         et = (EditText) findViewById(R.id.editText);
+        wb.setWebViewClient(new WebviewClient(preferences, et));
+        wb.getSettings().setJavaScriptEnabled(true);
         wb.setWebChromeClient(new WebchromeClient(sk, preferences, false, this));
 
         wb.setDownloadListener(new DownloadListener() {
