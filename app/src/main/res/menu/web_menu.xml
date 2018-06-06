@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+
         android:id="@+id/go2"
         android:icon="@mipmap/go_button"
         android:title="@string/go"
