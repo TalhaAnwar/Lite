@@ -1,11 +1,18 @@
 package com.example.talha.lite;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
@@ -16,11 +23,18 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.DownloadListener;
+import android.webkit.MimeTypeMap;
+import android.webkit.URLUtil;
 import android.webkit.WebIconDatabase;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import static com.example.talha.lite.Homescreen.validatehome;
+import static com.example.talha.lite.Homescreen.validateurl;
 
 public class webActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -53,9 +67,29 @@ public class webActivity extends AppCompatActivity {
         wb = (WebView) findViewById(R.id.webview);
         wb.setWebViewClient(new WebviewClient(preferences));
         wb.getSettings().setJavaScriptEnabled(true);
-        wb.getSettings().setBuiltInZoomControls(true);
         et = (EditText) findViewById(R.id.editText);
         wb.setWebChromeClient(new WebchromeClient(sk, preferences, false, this));
+
+        wb.setDownloadListener(new DownloadListener() {
+
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                if (getstoragepermission()) {
+                    DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+                    request.allowScanningByMediaScanner();
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, null, MimeTypeMap.getFileExtensionFromUrl(url)));
+                    dm.enqueue(request);
+                    Toast.makeText(getApplicationContext(), "Downloading", Toast.LENGTH_LONG).show();
+                } else {
+                    getstoragepermission();
+                    onDownloadStart(url, userAgent, contentDisposition, mimetype, contentLength);
+                }
+
+
+            }
+        });
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
         String home = preferences.getString("home", null);
         b = preferences.getBoolean("noimages_status", false);
@@ -128,7 +162,6 @@ public class webActivity extends AppCompatActivity {
         }
         if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
-            //noinspection RestrictedApi
             m.setOptionalIconsVisible(true);
         }
         return super.onCreateOptionsMenu(menu);
@@ -161,31 +194,11 @@ public class webActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.go2) {
             if (!et.getText().toString().isEmpty()) {
-                String url = et.getText().toString();
-                if ((url.contains("http://") || url.contains("https://"))) {
-                    if ((url.contains("www."))) {
-                        wb.loadUrl(url);
-                        et.setText(url);
-                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    }
-                } else {
-                    if (url.contains("www.")) {
-                        url = "https://" + url;
-                        wb.loadUrl(url);
-                        et.setText(url);
-                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    } else {
-                        url = R.string.google_search + url;
-                        wb.loadUrl(url);
-                        et.setText(url);
-                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    }
-                }
-
-
+                String url = validateurl(et.getText().toString());
+                wb.loadUrl(url);
+                et.setText(url);
+                InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                key.hideSoftInputFromWindow(et.getWindowToken(), 0);
             }
 
         }
@@ -204,23 +217,7 @@ public class webActivity extends AppCompatActivity {
             builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    String title = input.getText().toString();
-                    if ((title.contains("http://") || title.contains("https://"))) {
-                        if ((title.contains("www."))) {
-                            SharedPreferences.Editor edit = preferences.edit();
-                            edit.putString("home", title).apply();
-                        }
-                    } else {
-                        if (title.contains("www.")) {
-                            title = "https://" + title;
-                            SharedPreferences.Editor edit = preferences.edit();
-                            edit.putString("home", title).apply();
-                        } else {
-                            title = "https://www." + title;
-                            SharedPreferences.Editor edit = preferences.edit();
-                            edit.putString("home", title).apply();
-                        }
-                    }
+                    edit.putString("home", validatehome(input.getText().toString())).apply();
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -232,6 +229,19 @@ public class webActivity extends AppCompatActivity {
             builder.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean getstoragepermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
 }

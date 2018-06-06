@@ -1,8 +1,10 @@
 package com.example.talha.lite;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 
 /**
  * Created by Talha on 17/04/2018.
@@ -11,8 +13,15 @@ import android.webkit.WebViewClient;
 public class WebviewClient extends WebViewClient {
     private SharedPreferences preferences;
 
+
     public WebviewClient(SharedPreferences preferences) {
         this.preferences = preferences;
+
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        super.onPageStarted(view, url, favicon);
     }
 
     @Override

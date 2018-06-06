@@ -1,12 +1,16 @@
 package com.example.talha.lite;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
@@ -40,6 +44,41 @@ public class Homescreen extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
+    public static String validatehome(String url) {
+        if ((url.contains("http://") || url.contains("https://"))) {
+            if ((url.contains("www."))) {
+                return url;
+            }
+        } else {
+            if (url.contains("www.")) {
+                url = "https://" + url;
+                return url;
+            } else {
+                url = "https://www." + url;
+                return url;
+            }
+        }
+        return url;
+    }
+
+    public static String validateurl(String url) {
+        if ((url.contains("http://") || url.contains("https://"))) {
+            if ((url.contains("www."))) {
+                return url;
+            }
+        } else {
+            if (url.contains("www.")) {
+                url = "https://" + url;
+                return url;
+            } else {
+
+                url = R.string.google_search + url;
+                return url;
+            }
+        }
+        return url;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +95,7 @@ public class Homescreen extends AppCompatActivity {
             edit.putBoolean("incognito_status", false).apply();
             edit.putBoolean("noimages_status", false).apply();
             edit.putBoolean("homekey", true).apply();
+            getstoragepermission();
 
         }
         gv.setAdapter(new Myadapter(this, simgs));
@@ -75,7 +115,6 @@ public class Homescreen extends AppCompatActivity {
         });
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,20 +168,7 @@ public class Homescreen extends AppCompatActivity {
             String url = et1.getText().toString();
             if (!et1.getText().toString().isEmpty()) {
                 url = url.replaceAll(" ", "+");
-                if ((url.contains("http://") || url.contains("https://"))) {
-                    if ((url.contains("www."))) {
-                        startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
-                    }
-                } else {
-                    if (url.contains("www.")) {
-                        url = "https://" + url;
-                        startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
-                    } else {
-                        url = getString(R.string.google_search) + url;
-                        startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
-                    }
-                }
-
+                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", validateurl(url)));
             }
         }
         if (item.getItemId() == R.id.sethome) {
@@ -155,22 +181,8 @@ public class Homescreen extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String title = input.getText().toString();
-                    if ((title.contains("http://") || title.contains("https://"))) {
-                        if ((title.contains("www."))) {
-                            SharedPreferences.Editor edit = preferences.edit();
-                            edit.putString("home", title).apply();
-                        }
-                    } else {
-                        if (title.contains("www.")) {
-                            title = "https://" + title;
-                            SharedPreferences.Editor edit = preferences.edit();
-                            edit.putString("home", title).apply();
-                        } else {
-                            title = "https://www." + title;
-                            SharedPreferences.Editor edit = preferences.edit();
-                            edit.putString("home", title).apply();
-                        }
-                    }
+                    edit.putString("home", validatehome(title)).apply();
+
                 }
             });
             builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -182,5 +194,18 @@ public class Homescreen extends AppCompatActivity {
             builder.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean getstoragepermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 }

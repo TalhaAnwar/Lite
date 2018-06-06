@@ -3,9 +3,10 @@
     package="com.example.talha.lite">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -15,6 +16,9 @@
             android:name=".MainActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
+                <action-view>
+
+                </action-view>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,7 +32,7 @@
         <activity
             android:name=".Homescreen"
             android:theme="@style/mytheme" />
-        <activity android:name=".Bookmarks"></activity>
+        <activity android:name=".Bookmarks" />
     </application>
 
 </manifest>
