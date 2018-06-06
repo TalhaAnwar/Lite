@@ -19,7 +19,6 @@ public class WebviewClient extends WebViewClient {
     public WebviewClient(SharedPreferences preferences, EditText editText) {
         this.preferences = preferences;
         et = editText;
-
     }
 
     @Override
@@ -44,10 +43,4 @@ public class WebviewClient extends WebViewClient {
 
     }
 
-    @Override
-    public void onPageFinished(WebView view, String url) {
-        super.onPageFinished(view, url);
-
-
-    }
 }
