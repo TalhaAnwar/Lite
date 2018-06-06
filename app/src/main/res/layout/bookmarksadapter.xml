@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="@dimen/bookmark_picture_padding">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
+        android:paddingLeft="@dimen/bookmark_picture_padding"
         android:text="@string/title"
-        android:textSize="20sp" />
+        android:textSize="@dimen/bookmark_text_size" />
 </LinearLayout>

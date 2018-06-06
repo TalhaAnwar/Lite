@@ -25,7 +25,7 @@
     <item
         android:id="@+id/bookmarks"
         android:icon="@mipmap/bookmark"
-        android:title="@string/bookmarks" />
+        android:title="@string/show_bookmarks" />
     <item
         android:id="@+id/no_images"
         android:actionViewClass="android.widget.CheckBox"

@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:gravity="center"
-        android:text="Bookmarks"
-        android:textSize="30sp" />
+        android:text="@string/bookmarks"
+        android:textSize="@dimen/heading_size" />
 
     <ListView
         android:id="@+id/lv"

@@ -18,7 +18,7 @@
     <string name="delete_bookmark">Delete Bookmark ?</string>
     <string name="delete">Delete</string>
     <string name="no_images">No Images</string>
-    <string name="bookmarks">Show Bookmarks</string>
+    <string name="show_bookmarks">Show Bookmarks</string>
     <string name="speed_dials">Speed dials</string>
 
 
@@ -37,6 +37,7 @@
     <string name="urdupoint">https://www.urdupoint.com/</string>
     <string name="add_bookmark">Add to bookmark</string>
     <string name="private_browse">Private Browsing</string>
+    <string name="bookmarks">Bookmarks</string>
 
 
 </resources>
