@@ -71,7 +71,6 @@ public class Homescreen extends AppCompatActivity {
                 url = "https://" + url;
                 return url;
             } else {
-
                 url = R.string.google_search + url;
                 return url;
             }
@@ -167,6 +166,7 @@ public class Homescreen extends AppCompatActivity {
         if (item.getItemId() == R.id.go2) {
             String url = et1.getText().toString();
             if (!et1.getText().toString().isEmpty()) {
+                url = validateurl(url);
                 url = url.replaceAll(" ", "+");
                 startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", validateurl(url)));
             }
@@ -208,4 +208,5 @@ public class Homescreen extends AppCompatActivity {
             return true;
         }
     }
+
 }

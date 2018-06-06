@@ -173,7 +173,7 @@ public class webActivity extends AppCompatActivity {
             new WebchromeClient().savetitle();
         }
         if (item.getItemId() == R.id.privatebrowsing) {
-            if (item.isChecked()) {
+            if (!item.isChecked()) {
                 item.setChecked(true);
                 edit.putBoolean("incognito_status", true).apply();
             } else {
