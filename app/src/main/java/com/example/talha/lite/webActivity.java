@@ -68,7 +68,7 @@ public class webActivity extends AppCompatActivity {
         et = (EditText) findViewById(R.id.editText);
         wb.setWebViewClient(new WebviewClient(preferences, et));
         wb.getSettings().setJavaScriptEnabled(true);
-        wb.setWebChromeClient(new WebchromeClient(sk, preferences, false, this));
+        wb.setWebChromeClient(new WebchromeClient(sk, preferences, this));
 
         wb.setDownloadListener(new DownloadListener() {
 

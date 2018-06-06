@@ -21,9 +21,10 @@ class WebchromeClient extends WebChromeClient {
     static private Bitmap map;
     static private String url = null;
     static private Context ctx;
-    String title = null;
+    static private String title = null;
 
-    WebchromeClient(SeekBar sk, SharedPreferences preferences, Boolean flag, Context ctx) {
+
+    WebchromeClient(SeekBar sk, SharedPreferences preferences, Context ctx) {
         WebchromeClient.ctx = ctx;
         WebchromeClient.sk = sk;
         WebchromeClient.preferences = preferences;
@@ -48,6 +49,7 @@ class WebchromeClient extends WebChromeClient {
         sk.setProgress(newProgress);
         if (sk.getProgress() == 100) {
             sk.setVisibility(View.GONE);
+
         } else {
             sk.setVisibility(View.VISIBLE);
         }
@@ -82,9 +84,7 @@ class WebchromeClient extends WebChromeClient {
         } else {
             edit.putString("imageurl", url).apply();
         }
-
         return true;
-
     }
 
     void savetitle() {
