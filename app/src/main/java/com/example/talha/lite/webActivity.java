@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -68,6 +69,7 @@ public class webActivity extends AppCompatActivity {
         et = (EditText) findViewById(R.id.editText);
         wb.setWebViewClient(new WebviewClient(preferences, et));
         wb.getSettings().setJavaScriptEnabled(true);
+        registerForContextMenu(wb);
         wb.setWebChromeClient(new WebchromeClient(sk, preferences, this));
 
         wb.setDownloadListener(new DownloadListener() {
@@ -148,6 +150,34 @@ public class webActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        final WebView.HitTestResult result = wb.getHitTestResult();
+        if (result.getType() == WebView.HitTestResult.IMAGE_TYPE ||
+                result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+            menu.add(0, 1, 0, "Save Image").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    String imgUrl = result.getExtra();
+                    if (URLUtil.isValidUrl(imgUrl)) {
+                        DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(imgUrl));
+                        request.allowScanningByMediaScanner();
+                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(imgUrl, null, MimeTypeMap.getFileExtensionFromUrl(imgUrl)));
+                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                        dm.enqueue(request);
+
+                        Toast.makeText(getBaseContext(), "image saved.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "Invalid image url.", Toast.LENGTH_SHORT).show();
+                    }
+                    return false;
+                }
+            });
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

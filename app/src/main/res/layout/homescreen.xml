@@ -10,7 +10,9 @@
         android:id="@+id/toolbar"
         style="@style/ActionButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/bookmark_picture_padding">
 
         <EditText
             android:id="@+id/et1"
