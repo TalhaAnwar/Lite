@@ -9,5 +9,6 @@
     <dimen name="bookmark_picture_padding">10dp</dimen>
     <dimen name="bookmark_text_size">20sp</dimen>
     <dimen name="speed_dial_margin">10dp</dimen>
+    <dimen name="speeddial_leftright_margin">20dp</dimen>
 
 </resources>

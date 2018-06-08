@@ -20,6 +20,7 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         lv = (ListView) findViewById(R.id.historylist);
         String s = preferences.getString("history", null);

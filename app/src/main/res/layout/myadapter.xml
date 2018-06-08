@@ -11,8 +11,10 @@
         android:layout_width="@android:dimen/notification_large_icon_width"
         android:layout_height="@android:dimen/notification_large_icon_height"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/speed_dial_margin"
-        android:stretchMode="columnWidth"
+        android:layout_marginBottom="@dimen/list_padding"
+        android:layout_marginLeft="@dimen/speeddial_leftright_margin"
+        android:layout_marginRight="@dimen/speeddial_leftright_margin"
+        android:layout_marginTop="@dimen/list_padding"
         app:srcCompat="@mipmap/default_web" />
 
 </LinearLayout>

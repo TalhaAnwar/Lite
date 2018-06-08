@@ -19,10 +19,12 @@ import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.DownloadListener;
 import android.webkit.MimeTypeMap;
@@ -32,6 +34,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.example.talha.lite.Homescreen.validatehome;
@@ -66,7 +69,23 @@ public class webActivity extends AppCompatActivity {
         forward = (Button) findViewById(R.id.forward);
         refresh = (Button) findViewById(R.id.refresh);
         wb = (WebView) findViewById(R.id.webview);
+        wb.requestFocus();
         et = (EditText) findViewById(R.id.editText);
+        et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if (!et.getText().toString().isEmpty()) {
+                        String url = validateurl(et.getText().toString());
+                        wb.loadUrl(url);
+                        et.setText(url);
+                        InputMethodManager key = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        key.hideSoftInputFromWindow(et.getWindowToken(), 0);
+                    }
+                }
+                return false;
+            }
+        });
         wb.setWebViewClient(new WebviewClient(preferences, et));
         wb.getSettings().setJavaScriptEnabled(true);
         registerForContextMenu(wb);
@@ -81,7 +100,7 @@ public class webActivity extends AppCompatActivity {
                     DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
                     request.allowScanningByMediaScanner();
                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, null, MimeTypeMap.getFileExtensionFromUrl(url)));
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimetype));
                     dm.enqueue(request);
                     Toast.makeText(getApplicationContext(), "Downloading", Toast.LENGTH_LONG).show();
                 } else {
@@ -167,7 +186,6 @@ public class webActivity extends AppCompatActivity {
                         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(imgUrl, null, MimeTypeMap.getFileExtensionFromUrl(imgUrl)));
                         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                         dm.enqueue(request);
-
                         Toast.makeText(getBaseContext(), "image saved.", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getBaseContext(), "Invalid image url.", Toast.LENGTH_SHORT).show();
@@ -176,7 +194,6 @@ public class webActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     @Override

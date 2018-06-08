@@ -17,12 +17,15 @@ import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 
 
 public class Homescreen extends AppCompatActivity {
@@ -87,7 +90,21 @@ public class Homescreen extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         edit = preferences.edit();
         et1 = (EditText) findViewById(R.id.et1);
+        et1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String url = et1.getText().toString();
+                    if (!et1.getText().toString().isEmpty()) {
+                        url = validateurl(url);
+                        startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
+                    }
+                }
+                return false;
+            }
+        });
         gv = (GridView) findViewById(R.id.gv);
+        gv.requestFocus();
         if (!preferences.getBoolean("homekey", false)) {
 
             edit.putString("home", getString(R.string.google_search)).apply();

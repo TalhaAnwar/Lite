@@ -8,7 +8,6 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        style="@style/ActionButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -20,6 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:hint="@string/enter_url"
+            android:imeOptions="actionSearch"
             android:inputType="textVisiblePassword"
             android:maxLines="1" />
 
@@ -41,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/text"
+        android:columnWidth="@android:dimen/notification_large_icon_width"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth" />
 
