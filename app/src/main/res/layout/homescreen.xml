@@ -42,7 +42,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/text"
         android:columnWidth="@android:dimen/notification_large_icon_width"
-        android:numColumns="auto_fit"
+        android:numColumns="4"
         android:stretchMode="columnWidth" />
 
 </RelativeLayout>

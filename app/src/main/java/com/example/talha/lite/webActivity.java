@@ -69,8 +69,10 @@ public class webActivity extends AppCompatActivity {
         forward = (Button) findViewById(R.id.forward);
         refresh = (Button) findViewById(R.id.refresh);
         wb = (WebView) findViewById(R.id.webview);
-        wb.requestFocus();
         et = (EditText) findViewById(R.id.editText);
+        wb.setWebViewClient(new WebviewClient(preferences, et));
+        wb.setWebChromeClient(new WebchromeClient(sk, preferences, this));
+        wb.requestFocus();
         et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -86,11 +88,6 @@ public class webActivity extends AppCompatActivity {
                 return false;
             }
         });
-        wb.setWebViewClient(new WebviewClient(preferences, et));
-        wb.getSettings().setJavaScriptEnabled(true);
-        registerForContextMenu(wb);
-        wb.setWebChromeClient(new WebchromeClient(sk, preferences, this));
-
         wb.setDownloadListener(new DownloadListener() {
 
             @Override
@@ -149,8 +146,12 @@ public class webActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (wb.canGoBack())
+                if (wb.canGoBack()) {
                     wb.goBack();
+                } else {
+                    finish();
+                }
+
             }
         });
         forward.setOnClickListener(new View.OnClickListener() {
