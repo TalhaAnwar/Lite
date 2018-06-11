@@ -34,6 +34,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class webActivity extends AppCompatActivity {
     EditText et;
     WebView wb;
     ProgressBar sk;
+    RelativeLayout layout;
     SharedPreferences preferences;
     SharedPreferences.Editor edit;
     Boolean b;
@@ -64,6 +66,29 @@ public class webActivity extends AppCompatActivity {
             url = bundle.getString("url");
         }
         sk = (ProgressBar) findViewById(R.id.seekBar);
+        layout = (RelativeLayout) findViewById(R.id.wblayout);
+        layout.setOnTouchListener(new Swipelistener(this) {
+            public void onSwipeTop() {
+
+            }
+
+            public void onSwipeRight() {
+                if (wb.canGoBack()) {
+                    wb.goBack();
+                } else {
+                    finish();
+                }
+            }
+
+            public void onSwipeLeft() {
+                if (wb.canGoForward()) {
+                    wb.goForward();
+                }
+            }
+
+            public void onSwipeBottom() {
+            }
+        });
         homebtn = (Button) findViewById(R.id.home);
         back = (Button) findViewById(R.id.back);
         forward = (Button) findViewById(R.id.forward);
@@ -72,6 +97,14 @@ public class webActivity extends AppCompatActivity {
         et = (EditText) findViewById(R.id.editText);
         wb.setWebViewClient(new WebviewClient(preferences, et));
         wb.setWebChromeClient(new WebchromeClient(sk, preferences, this));
+        wb.getSettings().setJavaScriptEnabled(true);
+        wb.getSettings().setAllowFileAccess(true);
+        wb.getSettings().setBuiltInZoomControls(true);
+        wb.getSettings().setDisplayZoomControls(false);
+        wb.getSettings().setLoadWithOverviewMode(true);
+        wb.getSettings().setUseWideViewPort(true);
+        wb.getSettings().setDomStorageEnabled(true);
+        registerForContextMenu(wb);
         wb.requestFocus();
         et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -104,8 +137,6 @@ public class webActivity extends AppCompatActivity {
                     getstoragepermission();
                     onDownloadStart(url, userAgent, contentDisposition, mimetype, contentLength);
                 }
-
-
             }
         });
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
