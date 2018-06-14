@@ -36,6 +36,10 @@
         android:actionViewClass="android.widget.CheckBox"
         android:checkable="true"
         android:title="@string/private_browse" />
+    <item
+        android:id="@+id/aboutus"
+        android:icon="@mipmap/about_us"
+        android:title="@string/about_us" />
 
 
 </menu>

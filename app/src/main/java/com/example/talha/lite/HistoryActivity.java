@@ -29,12 +29,12 @@ public class HistoryActivity extends AppCompatActivity {
             s1 = s.split(",");
             lv.setAdapter(new ArrayAdapter<>(this, R.layout.listviewadapter, s1));
         }
-        final String[] s2=s1;
+        final String[] s2 = s1;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("load",s2[position]));
+                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("load", s2[position]));
             }
         });
     }
@@ -47,16 +47,14 @@ public class HistoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.delete) {
-            preferences.edit().putString("history", null).apply();
-            String s = preferences.getString("history", null);
-            String[] s1 = new String[0];
-            if (s != null) {
-                s1 = s.split(",");
-                lv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, s1));
-            } else {
-                lv.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, s1));
-            }
+        preferences.edit().putString("history", null).apply();
+        String s = preferences.getString("history", null);
+        String[] s1 = new String[0];
+        if (s != null) {
+            s1 = s.split(",");
+            lv.setAdapter(new ArrayAdapter<>(this, R.layout.listviewadapter, s1));
+        } else {
+            lv.setAdapter(new ArrayAdapter<>(this, R.layout.listviewadapter, s1));
         }
         return super.onOptionsItemSelected(item);
     }

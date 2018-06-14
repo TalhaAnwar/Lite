@@ -16,9 +16,6 @@
             android:name=".MainActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action-view>
-
-                </action-view>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,11 +26,19 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/mytheme"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".HistoryActivity" />
+        <activity
+            android:name=".HistoryActivity"
+            android:label="@string/history" />
         <activity
             android:name=".Homescreen"
             android:theme="@style/mytheme" />
-        <activity android:name=".Bookmarks" />
+        <activity
+            android:name=".Bookmarks"
+            android:label="@string/bookmarks" />
+        <activity
+            android:name=".AboutUs"
+            android:theme="@android:style/Theme.Dialog" />
+
     </application>
 
 </manifest>

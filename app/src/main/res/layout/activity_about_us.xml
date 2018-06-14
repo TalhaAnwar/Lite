@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.talha.lite.Bookmarks">
+    tools:context="com.example.talha.lite.AboutUs">
 
-    <ListView
-        android:id="@+id/lv"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/text" />
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="@string/about_us_details" />
+
 
 </RelativeLayout>

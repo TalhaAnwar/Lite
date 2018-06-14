@@ -19,7 +19,9 @@
     <string name="delete">Delete</string>
     <string name="no_images">No Images</string>
     <string name="show_bookmarks">Show Bookmarks</string>
-    <string name="speed_dials">Speed dials</string>
+    <string name="speed_dials">Most Popular</string>
+    <string name="about_us_details">The work is done by three Legends of MIT."\n"Talha Anwar MITF16E020"\n"Abid Hussain MITF16E004"\n"Ali Altaf Khan MITF16E024</string>
+    <string name="about_us">About Us</string>
 
 
     <string name="google">https://www.google.com</string>

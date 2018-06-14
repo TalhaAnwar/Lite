@@ -89,6 +89,7 @@ public class Homescreen extends AppCompatActivity {
         setSupportActionBar(toolbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         edit = preferences.edit();
+        gv = (GridView) findViewById(R.id.gv);
         et1 = (EditText) findViewById(R.id.et1);
         et1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -103,8 +104,7 @@ public class Homescreen extends AppCompatActivity {
                 return false;
             }
         });
-        gv = (GridView) findViewById(R.id.gv);
-        gv.requestFocus();
+
         if (!preferences.getBoolean("homekey", false)) {
 
             edit.putString("home", getString(R.string.google_search)).apply();
@@ -208,6 +208,9 @@ public class Homescreen extends AppCompatActivity {
                 }
             });
             builder.show();
+        }
+        if (item.getItemId() == R.id.aboutus) {
+            startActivity(new Intent(this, AboutUs.class));
         }
         return super.onOptionsItemSelected(item);
     }

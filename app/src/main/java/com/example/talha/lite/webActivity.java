@@ -307,6 +307,9 @@ public class webActivity extends AppCompatActivity {
             });
             builder.show();
         }
+        if (item.getItemId() == R.id.aboutus) {
+            startActivity(new Intent(getBaseContext(), AboutUs.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 
