@@ -60,13 +60,20 @@ public class webActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         edit = preferences.edit();
+        sk = (ProgressBar) findViewById(R.id.seekBar);
+        layout = (RelativeLayout) findViewById(R.id.wblayout);
+        homebtn = (Button) findViewById(R.id.home);
+        back = (Button) findViewById(R.id.back);
+        forward = (Button) findViewById(R.id.forward);
+        refresh = (Button) findViewById(R.id.refresh);
+        wb = (WebView) findViewById(R.id.webview);
+        et = (EditText) findViewById(R.id.editText);
+
         Bundle bundle = getIntent().getExtras();
         String url = null;
         if (bundle != null) {
             url = bundle.getString("url");
         }
-        sk = (ProgressBar) findViewById(R.id.seekBar);
-        layout = (RelativeLayout) findViewById(R.id.wblayout);
         layout.setOnTouchListener(new Swipelistener(this) {
             public void onSwipeTop() {
 
@@ -89,14 +96,8 @@ public class webActivity extends AppCompatActivity {
             public void onSwipeBottom() {
             }
         });
-        homebtn = (Button) findViewById(R.id.home);
-        back = (Button) findViewById(R.id.back);
-        forward = (Button) findViewById(R.id.forward);
-        refresh = (Button) findViewById(R.id.refresh);
-        wb = (WebView) findViewById(R.id.webview);
-        et = (EditText) findViewById(R.id.editText);
-        wb.setWebViewClient(new WebviewClient(preferences, et));
-        wb.setWebChromeClient(new WebchromeClient(sk, preferences, this));
+        wb.setWebViewClient(new WebviewClient());
+        wb.setWebChromeClient(new WebchromeClient(sk, preferences, this, et));
         wb.getSettings().setJavaScriptEnabled(true);
         wb.getSettings().setAllowFileAccess(true);
         wb.getSettings().setBuiltInZoomControls(true);
@@ -118,7 +119,7 @@ public class webActivity extends AppCompatActivity {
                         key.hideSoftInputFromWindow(et.getWindowToken(), 0);
                     }
                 }
-                return false;
+                return true;
             }
         });
         wb.setDownloadListener(new DownloadListener() {
@@ -145,9 +146,11 @@ public class webActivity extends AppCompatActivity {
         if (b) {
             wb.getSettings().setLoadsImagesAutomatically(false);
         }
-        if (home != null)
+        if (home != null) {
             wb.loadUrl(home);
-        et.setText(wb.getUrl());
+            et.setText(wb.getUrl());
+        }
+
         if (url != null) {
             wb.loadUrl(url);
             et.setText(url);
@@ -169,9 +172,10 @@ public class webActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String url = preferences.getString("home", null);
-                if (url != null)
+                if (url != null) {
                     wb.loadUrl(url);
-                et.setText(wb.getUrl());
+                    et.setText(wb.getUrl());
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -307,6 +311,9 @@ public class webActivity extends AppCompatActivity {
             });
             builder.show();
         }
+        if (item.getItemId() == R.id.settings) {
+            startActivity(new Intent(this, Settings.class));
+        }
         if (item.getItemId() == R.id.aboutus) {
             startActivity(new Intent(getBaseContext(), AboutUs.class));
         }
@@ -325,5 +332,6 @@ public class webActivity extends AppCompatActivity {
             return true;
         }
     }
+
 
 }

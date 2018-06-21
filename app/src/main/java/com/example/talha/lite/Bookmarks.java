@@ -33,6 +33,7 @@ public class Bookmarks extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (url[position] != "")
                     startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url[position]));
+                finish();
             }
         });
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

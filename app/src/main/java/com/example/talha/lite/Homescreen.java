@@ -41,6 +41,7 @@ public class Homescreen extends AppCompatActivity {
             R.string.pinterest, R.string.twitter, R.string.linkedin, R.string.urdupoint};
     SharedPreferences preferences;
     SharedPreferences.Editor edit;
+
     public static Bitmap decodeBase64(String input) {
         byte[] decodedByte = Base64.decode(input, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
@@ -211,6 +212,9 @@ public class Homescreen extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.aboutus) {
             startActivity(new Intent(this, AboutUs.class));
+        }
+        if (item.getItemId() == R.id.settings) {
+            startActivity(new Intent(this, Settings.class));
         }
         return super.onOptionsItemSelected(item);
     }

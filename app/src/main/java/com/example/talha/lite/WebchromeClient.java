@@ -21,12 +21,14 @@ class WebchromeClient extends WebChromeClient {
     static private Bitmap map;
     static private String url = null;
     static private Context ctx;
+    static private EditText et;
     static private String title = null;
 
 
-    WebchromeClient(ProgressBar sk, SharedPreferences preferences, Context ctx) {
+    WebchromeClient(ProgressBar sk, SharedPreferences preferences, Context ctx, EditText et) {
         WebchromeClient.ctx = ctx;
         WebchromeClient.sk = sk;
+        WebchromeClient.et = et;
         WebchromeClient.preferences = preferences;
 
     }
@@ -44,12 +46,22 @@ class WebchromeClient extends WebChromeClient {
 
     @Override
     public void onProgressChanged(WebView view, int newProgress) {
-
         super.onProgressChanged(view, newProgress);
+        String urls = view.getUrl();
         sk.setProgress(newProgress);
+        et.setText(view.getUrl());
         if (sk.getProgress() == 100) {
             sk.setVisibility(View.GONE);
-
+            Boolean b = preferences.getBoolean("incognito_status", false);
+            if (!b) {
+                SharedPreferences.Editor editor = preferences.edit();
+                String add = preferences.getString("history", "");
+                if (add != "") {
+                    editor.putString("history", urls + "," + add).apply();
+                } else {
+                    editor.putString("history", urls).apply();
+                }
+            }
         } else {
             sk.setVisibility(View.VISIBLE);
         }
@@ -61,6 +73,7 @@ class WebchromeClient extends WebChromeClient {
         map = icon;
         url = view.getUrl();
     }
+
 
     private boolean saveimage() {
         SharedPreferences.Editor edit = preferences.edit();

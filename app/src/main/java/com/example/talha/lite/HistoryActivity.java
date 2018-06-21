@@ -34,7 +34,8 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("load", s2[position]));
+                startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", s2[position]));
+                finish();
             }
         });
     }
