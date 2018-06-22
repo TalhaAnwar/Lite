@@ -136,14 +136,7 @@ public class Homescreen extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_menu, menu);
-        Boolean b = preferences.getBoolean("incognito_status", false);
-        if (b) {
-            menu.findItem(R.id.privatebrowsing).setChecked(true);
-        }
-        b = preferences.getBoolean("noimages_status", false);
-        if (b) {
-            menu.findItem(R.id.no_images).setChecked(true);
-        }
+
         if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
@@ -153,24 +146,6 @@ public class Homescreen extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.privatebrowsing) {
-            if (!item.isChecked()) {
-                item.setChecked(true);
-                edit.putBoolean("incognito_status", true).apply();
-            } else {
-                item.setChecked(false);
-                edit.putBoolean("incognito_status", false).apply();
-            }
-        }
-        if (item.getItemId() == R.id.no_images) {
-            if (!item.isChecked()) {
-                item.setChecked(true);
-                edit.putBoolean("noimages_status", true).apply();
-            } else {
-                item.setChecked(false);
-                edit.putBoolean("noimages_status", false).apply();
-            }
-        }
         if (item.getItemId() == R.id.bookmarks) {
             startActivity(new Intent(this, Bookmarks.class));
         }

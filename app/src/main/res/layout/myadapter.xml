@@ -15,6 +15,6 @@
         android:layout_marginLeft="@dimen/speeddial_leftright_margin"
         android:layout_marginRight="@dimen/speeddial_leftright_margin"
         android:layout_marginTop="@dimen/list_padding"
-        app:srcCompat="@mipmap/default_web" />
+        app:srcCompat="@drawable/ic_defaultweb" />
 
 </LinearLayout>

@@ -4,26 +4,26 @@
 
     <item
         android:id="@+id/go2"
-        android:icon="@mipmap/go_button"
+        android:icon="@drawable/ic_gobutton"
         android:title="@string/go"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/history"
-        android:icon="@mipmap/history"
+        android:icon="@drawable/ic_history"
         android:title="@string/history" />
     <item
         android:id="@+id/sethome"
-        android:icon="@mipmap/home"
+        android:icon="@drawable/ic_homebutton"
         android:title="@string/set_home" />
     <item
         android:id="@+id/home"
-        android:icon="@mipmap/home"
+        android:icon="@drawable/ic_homebutton"
         android:title="@string/home"
         app:showAsAction="always" />
     <item
         android:id="@+id/bookmarks"
-        android:icon="@mipmap/bookmark"
+        android:icon="@drawable/ic_bookmarks"
         android:title="@string/show_bookmarks" />
 
     <item

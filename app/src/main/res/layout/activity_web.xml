@@ -53,7 +53,7 @@
             android:layout_height="@dimen/bottombar_icon_size_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:background="@mipmap/back_button" />
+            android:background="@drawable/ic_backbutton" />
 
         <Button
             android:id="@+id/refresh"
@@ -62,7 +62,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_toLeftOf="@+id/home"
-            android:background="@mipmap/refresh_button" />
+            android:background="@drawable/ic_refreshbutton" />
 
         <Button
             android:id="@+id/home"
@@ -70,7 +70,7 @@
             android:layout_height="@dimen/bottombar_icon_size_height"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:background="@mipmap/home"
+            android:background="@drawable/ic_homebutton"
 
             />
 
@@ -81,7 +81,7 @@
             android:layout_height="@dimen/bottombar_icon_size_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:background="@mipmap/forward_button" />
+            android:background="@drawable/ic_forwardbutton" />
 
 
     </RelativeLayout>

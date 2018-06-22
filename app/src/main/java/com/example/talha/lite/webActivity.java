@@ -333,5 +333,14 @@ public class webActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        b = preferences.getBoolean("noimages_status", false);
+        if (b) {
+            wb.getSettings().setLoadsImagesAutomatically(false);
+        } else {
+            wb.getSettings().setLoadsImagesAutomatically(true);
+        }
+    }
 }

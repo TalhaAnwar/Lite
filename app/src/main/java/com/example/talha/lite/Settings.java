@@ -77,7 +77,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
         switch (v.getId()) {
             case R.id.no_images_label:
-                b = preferences.getBoolean("noimages_status", false);
                 if (noimgs.isChecked()) {
                     noimgs.setChecked(false);
                     editor.putBoolean("noimages_status", false).apply();
@@ -87,7 +86,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.incognito_label:
-                b = preferences.getBoolean("incognito_status", false);
                 if (pris.isChecked()) {
                     pris.setChecked(false);
                     editor.putBoolean("incognito_status", false).apply();
@@ -97,7 +95,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.security:
-                b = preferences.getBoolean("passwordenabled", false);
                 if (passs.isChecked()) {
                     passs.setChecked(false);
                     chpass.setVisibility(View.GONE);
@@ -173,6 +170,37 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.aboutus:
                 startActivity(new Intent(this, AboutUs.class));
+                break;
+            case R.id.no_images:
+                if (noimgs.isChecked()) {
+                    noimgs.setChecked(false);
+                    editor.putBoolean("noimages_status", false).apply();
+                } else {
+                    noimgs.setChecked(true);
+                    editor.putBoolean("noimages_status", true).apply();
+                }
+                break;
+            case R.id.privatebrowsing:
+                if (pris.isChecked()) {
+                    pris.setChecked(false);
+                    editor.putBoolean("incognito_status", false).apply();
+                } else {
+                    pris.setChecked(true);
+                    editor.putBoolean("incognito_status", true).apply();
+                }
+                break;
+            case R.id.secure:
+                if (passs.isChecked()) {
+                    passs.setChecked(false);
+                    chpass.setVisibility(View.GONE);
+                    img.setVisibility(View.GONE);
+                    editor.putBoolean("passwordenabled", false).apply();
+                } else {
+                    passs.setChecked(true);
+                    chpass.setVisibility(View.VISIBLE);
+                    img.setVisibility(View.VISIBLE);
+                    editor.putBoolean("passwordenabled", true).apply();
+                }
                 break;
         }
     }
