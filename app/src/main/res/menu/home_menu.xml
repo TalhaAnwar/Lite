@@ -19,8 +19,7 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_homebutton"
-        android:title="@string/home"
-        app:showAsAction="always" />
+        android:title="@string/home" />
     <item
         android:id="@+id/bookmarks"
         android:icon="@drawable/ic_bookmarks"
