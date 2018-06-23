@@ -29,7 +29,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_settings);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
-
+        getSupportActionBar().setTitle(R.string.settings);
         noimg = (TextView) findViewById(R.id.no_images_label);
         noimg.setOnClickListener(this);
         pri = (TextView) findViewById(R.id.incognito_label);

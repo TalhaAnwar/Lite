@@ -45,12 +45,12 @@
         android:layout_alignParentRight="true"
         android:clickable="false" />
 
-    <Space
+    <View
         android:id="@+id/space1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/no_images"
-        android:background="?android:attr/listDivider"
+        android:background="@color/colorPrimaryDarkLight"
         android:padding="10dp" />
 
 
@@ -92,12 +92,12 @@
         android:layout_alignParentRight="true"
         android:clickable="false" />
 
-    <Space
+    <View
         android:id="@+id/space2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/incognito_label"
-        android:background="?android:attr/listDivider"
+        android:background="@color/colorPrimaryDarkLight"
         android:padding="10dp" />
 
     <TextView
@@ -167,12 +167,12 @@
         android:clickable="false"
         app:srcCompat="@drawable/ic_settings" />
 
-    <Space
+    <View
         android:id="@+id/space3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/changepass"
-        android:background="?android:attr/listDivider"
+        android:background="@color/colorPrimaryDarkLight"
         android:padding="10dp" />
 
 

@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/checkBox"
-        android:icon="@drawable/ic_bookmarks"
+        android:icon="@drawable/ic_addbookmark"
         android:title="@string/add_bookmark" />
 
     <item
