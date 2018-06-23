@@ -14,7 +14,7 @@
     <string name="title">Title</string>
     <string name="history">History</string>
     <string name="home">Home</string>
-    <string name="set_home">Set Home</string>
+    <string name="set_home">Set Home Page</string>
     <string name="delete_bookmark">Delete Bookmark ?</string>
     <string name="delete">Delete</string>
     <string name="no_images">No Images</string>
@@ -55,6 +55,7 @@
     <string name="change_password">Create/Change Password</string>
     <string name="enter_current_pass">Enter Current password :</string>
     <string name="about">About App</string>
+    <string name="general">Other Settings</string>
 
 
 </resources>

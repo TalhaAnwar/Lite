@@ -15,8 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.talha.lite.Homescreen.validatehome;
+
 public class Settings extends AppCompatActivity implements View.OnClickListener {
-    TextView noimg, pri, pass, chpass, aboutus;
+    TextView noimg, pri, pass, chpass, aboutus, sethome;
     android.support.v7.widget.AppCompatImageButton img;
     SwitchCompat noimgs, pris, passs;
     SharedPreferences preferences;
@@ -30,6 +32,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
         getSupportActionBar().setTitle(R.string.settings);
+        sethome = (TextView) findViewById(R.id.sethome);
+        sethome.setOnClickListener(this);
         noimg = (TextView) findViewById(R.id.no_images_label);
         noimg.setOnClickListener(this);
         pri = (TextView) findViewById(R.id.incognito_label);
@@ -201,6 +205,29 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                     img.setVisibility(View.VISIBLE);
                     editor.putBoolean("passwordenabled", true).apply();
                 }
+                break;
+            case R.id.sethome:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.enter_home_url);
+                final EditText input = new EditText(this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+                builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String title = input.getText().toString();
+                        editor.putString("home", validatehome(title)).apply();
+
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+
                 break;
         }
     }

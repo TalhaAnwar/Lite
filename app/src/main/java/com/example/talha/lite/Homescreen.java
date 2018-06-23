@@ -1,7 +1,6 @@
 package com.example.talha.lite;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,11 +10,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -162,28 +159,6 @@ public class Homescreen extends AppCompatActivity {
                 url = validateurl(url);
                 startActivity(new Intent(getBaseContext(), webActivity.class).putExtra("url", url));
             }
-        }
-        if (item.getItemId() == R.id.sethome) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.enter_home_url);
-            final EditText input = new EditText(this);
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            builder.setView(input);
-            builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    String title = input.getText().toString();
-                    edit.putString("home", validatehome(title)).apply();
-
-                }
-            });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.show();
         }
         if (item.getItemId() == R.id.aboutus) {
             startActivity(new Intent(this, AboutUs.class));

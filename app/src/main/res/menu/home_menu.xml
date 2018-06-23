@@ -13,10 +13,6 @@
         android:icon="@drawable/ic_history"
         android:title="@string/history" />
     <item
-        android:id="@+id/sethome"
-        android:icon="@drawable/ic_homebutton"
-        android:title="@string/set_home" />
-    <item
         android:id="@+id/home"
         android:icon="@drawable/ic_homebutton"
         android:title="@string/home" />

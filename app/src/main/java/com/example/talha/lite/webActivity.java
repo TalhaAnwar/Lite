@@ -3,7 +3,6 @@ package com.example.talha.lite;
 import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,11 +12,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -38,7 +35,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.talha.lite.Homescreen.validatehome;
 import static com.example.talha.lite.Homescreen.validateurl;
 
 public class webActivity extends AppCompatActivity {
@@ -290,26 +286,6 @@ public class webActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.history) {
             startActivity(new Intent(this, HistoryActivity.class));
-        }
-        if (item.getItemId() == R.id.sethome) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.enter_home_url);
-            final EditText input = new EditText(this);
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            builder.setView(input);
-            builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    edit.putString("home", validatehome(input.getText().toString())).apply();
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.show();
         }
         if (item.getItemId() == R.id.settings) {
             startActivity(new Intent(this, Settings.class));
