@@ -145,6 +145,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                                 builder2.setTitle(R.string.enter_password);
                                 builder2.setCancelable(false);
                                 final EditText input = new EditText(getBaseContext());
+                                input.setTextColor(getResources().getColor(R.color.text_color));
                                 input.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                                 builder2.setView(input);
                                 builder2.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
