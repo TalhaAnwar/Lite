@@ -72,7 +72,6 @@ public class webActivity extends AppCompatActivity {
         }
         layout.setOnTouchListener(new Swipelistener(this) {
             public void onSwipeTop() {
-
             }
 
             public void onSwipeRight() {
@@ -90,6 +89,7 @@ public class webActivity extends AppCompatActivity {
             }
 
             public void onSwipeBottom() {
+                wb.reload();
             }
         });
         wb.setWebViewClient(new WebviewClient());
@@ -298,10 +298,10 @@ public class webActivity extends AppCompatActivity {
 
     public boolean getstoragepermission() {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                 return false;
             }
         } else {

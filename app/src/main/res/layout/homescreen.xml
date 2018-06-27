@@ -1,48 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.talha.lite.Homescreen">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/bookmark_picture_padding">
-
-        <EditText
-            android:id="@+id/et1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:hint="@string/enter_url"
-            android:imeOptions="actionSearch"
-            android:inputType="textVisiblePassword"
-            android:maxLines="1" />
-
-    </android.support.v7.widget.Toolbar>
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:fontFamily="cursive"
-        android:gravity="center"
-        android:text="@string/speed_dials"
-        android:textSize="@dimen/heading_size" />
-
-
-    <GridView
-        android:id="@+id/gv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/text"
-        android:columnWidth="@android:dimen/notification_large_icon_width"
-        android:numColumns="4"
-        android:stretchMode="columnWidth" />
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/bookmark_picture_padding">
+
+            <EditText
+                android:id="@+id/et1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="@string/enter_url"
+                android:imeOptions="actionSearch"
+                android:inputType="textVisiblePassword"
+                android:maxLines="1" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="@string/speed_dials"
+            android:textSize="@dimen/heading_size" />
+
+
+        <GridView
+            android:id="@+id/gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:background="@android:color/white"
+            android:columnWidth="@android:dimen/notification_large_icon_width"
+            android:numColumns="4"
+            android:stretchMode="columnWidth" />
+
+        <TextView
+            android:id="@+id/news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gv"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="@string/news"
+            android:textSize="@dimen/heading_size" />
+
+        <android.support.v7.widget.ListViewCompat
+            android:id="@+id/newslistview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/news"
+            android:background="@android:color/white"
+            android:padding="5dp" />
+
+
+    </LinearLayout>
+
+</ScrollView>

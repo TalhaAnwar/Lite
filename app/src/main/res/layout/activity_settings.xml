@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,43 +7,51 @@
     android:orientation="vertical"
     tools:context="com.example.talha.lite.Settings">
 
-    <TextView
-        android:id="@+id/modeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/mode"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/no_images_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/modeLabel"
-        android:padding="10dp"
-        android:text="@string/no_images"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/modeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/mode"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/no_images_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/modeLabel"
+            android:padding="10dp"
+            android:text="@string/no_images"
+            android:textSize="15sp" />
 
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/no_images"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/no_images_label"
-        android:layout_alignBottom="@+id/no_images_label"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:clickable="false" />
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/no_images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/no_images_label"
+            android:layout_alignBottom="@+id/no_images_label"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:clickable="false" />
+
+    </RelativeLayout>
+
 
     <View
         android:id="@+id/space1"
@@ -63,34 +71,41 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/space1"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/privacy"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/incognito_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/PrivacyLabel"
-        android:padding="10dp"
-        android:text="@string/private_browse"
-        android:textSize="15sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/privatebrowsing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/incognito_label"
-        android:layout_alignBottom="@+id/incognito_label"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:clickable="false" />
+        <TextView
+            android:id="@+id/incognito_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:padding="10dp"
+            android:text="@string/private_browse"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/privatebrowsing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/incognito_label"
+            android:layout_alignBottom="@+id/incognito_label"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:clickable="false" />
+
+
+    </RelativeLayout>
 
     <View
         android:id="@+id/space2"
@@ -109,63 +124,70 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/space2"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/security"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/security"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/Security_label"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:text="@string/enable_password"
-        android:textSize="15sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/secure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/security"
-        android:layout_alignBottom="@+id/security"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:clickable="false" />
+        <TextView
+            android:id="@+id/security"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/enable_password"
+            android:textSize="15sp" />
 
-    <TextView
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/secure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/security"
+            android:layout_alignBottom="@+id/security"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:clickable="false" />
 
-        android:id="@+id/changepass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/security"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:text="@string/change_password"
-        android:textSize="15sp" />
+        <TextView
+
+            android:id="@+id/changepass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/security"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/change_password"
+            android:textSize="15sp" />
 
 
-    <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/security"
-        android:layout_marginTop="2dp"
-        android:background="@android:color/transparent"
-        android:clickable="false"
-        app:srcCompat="@drawable/ic_settings" />
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/security"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            app:srcCompat="@drawable/ic_settings" />
+
+    </RelativeLayout>
+
 
     <View
         android:id="@+id/space3"
@@ -175,49 +197,6 @@
         android:background="@color/colorPrimaryDarkLight"
         android:padding="10dp" />
 
-
-    <TextView
-        android:id="@+id/abouthead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/space3"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/about"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-
-        android:id="@+id/aboutus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/abouthead"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:text="@string/about_us"
-        android:textSize="15sp" />
-
-    <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/abouthead"
-        android:layout_marginTop="2dp"
-        android:background="@android:color/transparent"
-        android:clickable="false"
-        android:contextClickable="false"
-        app:srcCompat="@drawable/ic_aboutus" />
 
     <View
         android:id="@+id/space4"
@@ -237,39 +216,127 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/space4"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/general"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        android:id="@+id/sethome"
+        <TextView
+
+            android:id="@+id/sethome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/set_home"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:contextClickable="false"
+            app:srcCompat="@drawable/ic_homebutton" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:id="@+id/downloadslocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/Downloads"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:contextClickable="false"
+            app:srcCompat="@drawable/ic_downloads" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/abouthead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/General"
-        android:gravity="center_vertical"
+        android:layout_below="@+id/space3"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:padding="10dp"
-        android:text="@string/set_home"
-        android:textSize="15sp" />
+        android:text="@string/about"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/General"
-        android:layout_marginTop="2dp"
-        android:background="@android:color/transparent"
-        android:clickable="false"
-        android:contextClickable="false"
-        app:srcCompat="@drawable/ic_homebutton" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:id="@+id/aboutus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/about_us"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:contextClickable="false"
+            app:srcCompat="@drawable/ic_aboutus" />
+
+
+    </RelativeLayout>
+
 
     <View
         android:id="@+id/space5"
@@ -279,4 +346,4 @@
         android:background="@color/colorPrimaryDarkLight"
         android:padding="10dp" />
 
-</RelativeLayout>
+</LinearLayout>

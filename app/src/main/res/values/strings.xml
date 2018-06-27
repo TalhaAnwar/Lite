@@ -4,8 +4,8 @@
     <string name="enter_home_url">Enter Address</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
-    <string name="enter_title">Enter Title</string>
-    <string name="enter_url">Enter Url</string>
+    <string name="enter_title">Enter Bookmark Title</string>
+    <string name="enter_url">Search</string>
     <string name="go">Go</string>
     <string name="clear_history">Clear History</string>
     <string name="back">Back</string>
@@ -17,25 +17,20 @@
     <string name="set_home">Set Home Page</string>
     <string name="delete_bookmark">Delete Bookmark ?</string>
     <string name="delete">Delete</string>
-    <string name="no_images">No Images</string>
+    <string name="no_images">Show Images </string>
     <string name="show_bookmarks">Bookmarks</string>
     <string name="speed_dials">Most Popular</string>
-    <string name="about_us_details">The work is done by Three Legends of MIT."\n"Talha Anwar MITF16E020"\n"Abid Hussain MITF16E004"\n"Ali Altaf Khan MITF16E024"\n"</string>
+    <string name="about_us_details">The work is done by Students of MIT."\n"Talha Anwar MITF16E020"\n"Abid Hussain MITF16E004"\n"Ali Altaf Khan MITF16E024"\n"Developed For :"\n"UOS</string>
     <string name="about_us">About Us</string>
 
 
     <string name="google">https://www.google.com</string>
     <string name="youtube">https://www.youtube.com</string>
     <string name="facebook">https://www.facebook.com</string>
-    <string name="wikipedia">https://www.wikipedia.org</string>
     <string name="amazon">https://www.amazon.com</string>
-    <string name="olx">https://www.olx.com</string>
-    <string name="yahoo">https://www.yahoo.com</string>
     <string name="instragram">https://www.instagram.com</string>
     <string name="dailymotion">https://www.dailymotion.com</string>
-    <string name="pinterest">https://www.pinterest.com</string>
     <string name="twitter">https://www.twitter.com</string>
-    <string name="linkedin">https://www.linkedin.com</string>
     <string name="urdupoint">https://www.urdupoint.com/</string>
     <string name="add_bookmark">Add to bookmark</string>
     <string name="private_browse">Private Browsing</string>
@@ -56,6 +51,8 @@
     <string name="enter_current_pass">Enter Current password :</string>
     <string name="about">About App</string>
     <string name="general">Other Settings</string>
+    <string name="Downloads">Downloads</string>
+    <string name="news">News</string>
 
 
 </resources>
