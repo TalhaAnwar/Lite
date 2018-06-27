@@ -20,6 +20,11 @@
         android:id="@+id/bookmarks"
         android:icon="@drawable/ic_bookmarks"
         android:title="@string/show_bookmarks" />
+    <item
+        android:id="@+id/downloadslocation"
+        android:icon="@drawable/ic_downloads"
+        android:title="@string/Downloads" />
+
 
     <item
         android:id="@+id/settings"

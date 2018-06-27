@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -194,6 +195,12 @@ public class Homescreen extends AppCompatActivity {
         if (item.getItemId() == R.id.settings) {
             startActivity(new Intent(this, Settings.class));
         }
+        if (item.getItemId() == R.id.downloadslocation) {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            Uri mydir = Uri.parse("Root/Phone Storage/Download");
+            intent.setDataAndType(mydir, "*/*");    // or use */*
+            startActivityForResult(intent, 1);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -201,6 +208,14 @@ public class Homescreen extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         new FetchFeedTask().execute((Void) null);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            startActivity(new Intent(Intent.ACTION_VIEW).setDataAndType(data.getData(), data.getType()));
+        }
     }
 
     public boolean getstoragepermission() {

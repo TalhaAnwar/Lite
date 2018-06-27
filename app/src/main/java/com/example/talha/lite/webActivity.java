@@ -243,6 +243,7 @@ public class webActivity extends AppCompatActivity {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
         }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -293,7 +294,23 @@ public class webActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.aboutus) {
             startActivity(new Intent(getBaseContext(), AboutUs.class));
         }
+        if (item.getItemId() == R.id.downloadslocation) {
+            if (item.getItemId() == R.id.downloadslocation) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                Uri mydir = Uri.parse("Root/Phone Storage/Download");
+                intent.setDataAndType(mydir, "*/*");    // or use */*
+                startActivityForResult(intent, 1);
+            }
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            startActivity(new Intent(Intent.ACTION_VIEW).setDataAndType(data.getData(), data.getType()));
+        }
     }
 
     public boolean getstoragepermission() {

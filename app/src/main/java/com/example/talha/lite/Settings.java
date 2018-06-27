@@ -3,7 +3,6 @@ package com.example.talha.lite;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -19,8 +18,8 @@ import android.widget.Toast;
 import static com.example.talha.lite.Homescreen.validatehome;
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
-    TextView noimg, pri, pass, chpass, aboutus, sethome, downloadlocation;
-    android.support.v7.widget.AppCompatImageButton img, imageButton4;
+    TextView noimg, pri, pass, chpass, aboutus, sethome;
+    android.support.v7.widget.AppCompatImageButton img;
     SwitchCompat noimgs, pris, passs;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -53,10 +52,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         pris.setOnClickListener(this);
         passs = (SwitchCompat) findViewById(R.id.secure);
         passs.setOnClickListener(this);
-        downloadlocation = (TextView) findViewById(R.id.downloadslocation);
-        downloadlocation.setOnClickListener(this);
-        imageButton4 = (AppCompatImageButton) findViewById(R.id.imageButton4);
-        imageButton4.setOnClickListener(this);
         b = preferences.getBoolean("noimages_status", true);
         if (b) {
             noimgs.setChecked(false);
@@ -235,24 +230,9 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 builder.show();
 
                 break;
-            case R.id.downloadslocation:
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                Uri mydir = Uri.parse("Root/Phone Storage/Download");
-                intent.setDataAndType(mydir, "*/*");    // or use */*
-                startActivityForResult(intent, 1);
 
-                break;
-            case R.id.imageButton4:
-
-                break;
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            startActivity(new Intent(Intent.ACTION_VIEW).setDataAndType(data.getData(), data.getType()));
-        }
-    }
+
 }
