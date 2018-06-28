@@ -14,7 +14,7 @@
     <string name="title">Title</string>
     <string name="history">History</string>
     <string name="home">Home</string>
-    <string name="set_home">Set Home Page</string>
+    <string name="set_home">Change Home Page</string>
     <string name="delete_bookmark">Delete Bookmark ?</string>
     <string name="delete">Delete</string>
     <string name="no_images">Show Images </string>
@@ -43,7 +43,7 @@
     <string name="no">No</string>
     <string name="wrong_password">Wrong password</string>
     <string name="settings">Settings</string>
-    <string name="mode">Mode</string>
+    <string name="mode">Data Save Mode</string>
     <string name="security">Security</string>
     <string name="enable_password">Enable Password ?</string>
     <string name="privacy">Privacy</string>

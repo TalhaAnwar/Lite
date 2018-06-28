@@ -30,7 +30,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -369,9 +368,7 @@ public class Homescreen extends AppCompatActivity {
                 // Fill RecyclerView
                 listView.setAdapter(new RssFeedListAdapter(mFeedModelList));
             } else {
-                Toast.makeText(Homescreen.this,
-                        "Enter a valid Rss feed url",
-                        Toast.LENGTH_SHORT).show();
+
             }
         }
     }
